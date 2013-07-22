@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<form id="PostForm">
+    <fieldset>
+        <label for="ApiKey">Api Key</label>
+        <input id="ApiKey" name="ApiKey">
+        <br />
+        <label for="PostUserId">Author Key</label>
+        <input id="PostUserId" name="PostUserId">
+        <br />
+        <label for="PostSlug">Slug</label>
+        <input id="PostSlug" width="200" name="PostSlug">
+        <br />
+        <label for="PostTitle">Title</label>
+        <input id="PostTitle" width="200" name="PostTitle">
+        <br />
+        <label for="PostTitle">Body</label>
+        <textarea id="PostBody" rows="40" cols="40" name="PostBody"></textarea>
+        <br />
+
+        <select id="PostStatus" name="PostStatus" class="select-post-status">
+            <option value="draft">draft</option>
+            <option value="published">published</option>
+            <option value="deleted">deleted</option>
+        </select>
+    </fieldset>
+    <div class="form-controls-container">
+        <button type="submit" class="btn-round btn-save btn-post-control btn-save-post">Save</button>
+        <button class="btn-round btn-reset btn-post-control btn-reset-post">Clear</button>
+        <button class="btn-round btn-preview btn-post-control btn-preview-post">preview</button>
+    </div>
+</form>
+</body>
+</html>

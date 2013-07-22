@@ -1,0 +1,8 @@
+{
+    "logging":{
+        "logInfo":true,
+        "logWarnings":true,
+        "logErrors":true
+    }
+
+}

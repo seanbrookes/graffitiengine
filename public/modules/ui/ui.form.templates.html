@@ -1,0 +1,37 @@
+<div id="UIFormModuleTemplateContainer">
+
+    <!-- Home -->
+    <script id="UIFormIndexTemplate" type="text/template" >
+
+        <h1>UI Form Index</h1>
+
+    </script>
+
+    <!-- Home -->
+    <script id="UIFormIndexLayoutTemplate" type="text/template" >
+
+        <div class="view-index ui-form-container ui-view" data-view="index-view">UI Form Index layout</div>
+
+    </script>
+
+    <script id="UIFormTemplate" type="text/template">
+    </script>
+
+    <script id="UIFormFieldTextTemplate" type="text/template">
+    </script>
+
+    <script id="UIButtonTemplate" type="text/template"><%= S.text %>
+    </script>
+
+    <script id="UIFormDataListOptionTemplate" type="text/template">
+        <option label="<%= S.label %>" value="<%= S.value %>"><%= S.display %></option>
+
+    </script>
+    <!-- UI Form DataList -->
+    <script id="UIFormDataListTemplate" type="text/template">
+        <label for="<%= S.inputId %>" data-i18n="<%= S.i18n %>"><%= S.label %></label>
+        <input list="<%= S.listId %>" name="<%= S.inputId %>" id="<%= S.inputId %>" />
+        <datalist id="<%= S.listId %>"></datalist>
+    </script>
+
+</div>

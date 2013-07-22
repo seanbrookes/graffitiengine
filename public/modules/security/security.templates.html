@@ -1,0 +1,76 @@
+<div id="SecurityModuleTemplateContainer">
+
+    <!-- Login -->
+    <script type="text/template" id="LoginFormTemplate" class="ui-template">
+        <h2 class="view-heading primary-view">Login</h2>
+        <form class="form-login forms columnar">
+            <ul>
+                <li>
+                    <label for="Email" class="bold">email</label>
+                    <input type="email" name="Email" id="Email" placeholder="Email Address" >
+                </li>
+                <li>
+                    <label for="Password" class="bold">password</label>
+                    <input type="password" name="Password" id="Password" placeholder="Password">
+                </li>
+                <li>
+                    <div class="button-group push">
+                        <button class="btn-form btn-login">login</button>
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </script>
+
+    <!-- Sign Up -->
+    <script type="text/template" id="SignUpTemplate" class="ui-template">
+        <h2 class="view-heading primary-view">Signup</h2>
+        <form class="form-signup forms columnar"  data-id="<%- S._id%>" action="#" method="POST">
+            <ul>
+                <li>
+                    <label for="Email" >Email</label>
+                    <input type="email" name="Email" id="Email" placeholder="Email Address">
+                </li>
+                <li>
+                    <label for="Password">Password</label>
+                    <input type="password" name="Password" id="Password" placeholder="Password">
+                </li>
+                <li class="push">
+                    <div class="button-group">
+                        <button class="btn-form btn-signup">sign up</button>
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </script>
+
+    <!-- Forgot Password -->
+    <script type="text/template" id="ForgotPasswordTemplate" class="ui-template">
+        <form name="ForgotPasswordForm" id="ForgotPasswordForm"  data-id="<%- S._id%>" method="post" action="#">
+            <div class="wrapping clearfix">
+                <section class="aligned">
+                    <input type="email" name="EmailAddress" id="EmailAddress" placeholder="Email Address" autocomplete="off" tabindex="1" class="txtinput">
+                </section>
+                <secion class="button-group">
+                    <button class="btn-form btn-forgot-password">send password</button>
+                </secion>
+            </div>
+        </form>
+    </script>
+
+
+    <!-- Home -->
+    <script id="SecurityIndexTemplate" type="text/template" >
+
+        <h1>Security Index</h1>
+
+    </script>
+
+    <!-- Index -->
+    <script id="SecurityIndexLayoutTemplate" type="text/template" >
+
+        <div class="view-index security-container ui-view" data-view="index-view">Security Index layout</div>
+
+    </script>
+
+</div>

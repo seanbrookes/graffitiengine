@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="en">
+    <head>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width">
+
+        <title><%= title %> :. seani.ca</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+    </head>
+    <body class="post-page">
+        <div class="viewport">
+            <header class="page-header" data-region="pageHeaderRegion">
+
+                <a class="header-home-link" href="/" title="seanica home">
+                    <img src="/images/logo.png" />
+                </a>
+                <h1>seanica</h1>
+
+            </header>
+
+            <nav class="main-nav" data-region="mainNavRegion"></nav>
+
+            <main role="main">
+                <article class="main-article" data-region="mainArticleRegion">
+                    <h1 class="article-title"><%= title %></h1>
+                    <label class="post-publish-date"><span>published:</span> <%= renderDate %></label>
+                    <label class="post-author"><span>author:</span> <%= author %></label>
+                    <%= body %>
+                </article>
+                <aside class="main-aside" data-region="asideDataRegion"></aside>
+            </main>
+
+            <footer class="page-footer" data-region="pageFooterRegion"></footer>
+        </div>
+        <script data-post-slug="<%= slug %>">
+            (function(){
+
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = 'http://www.seani.ca/scripts/post.js';
+
+                var entry = document.getElementsByTagName('script')[0];
+                entry.parentNode.insertBefore(script, entry);
+
+
+            }());
+        </script>
+    </body>
+</html>

@@ -1,0 +1,162 @@
+@import '_variables.less';
+@import 'base.less';
+@import 'kube.less';
+@import 'modal.less';
+@import 'glDatePicker.flatwhite.less';
+@import 'accordion.style.less';
+@import 'modal.less';
+@import 'post.less';
+@import 'jquery.toastmessage.less';
+@import 'markitup.less';
+@import 'markitup-set.less';
+
+/** basic default styles *
+
+
+http://commons.wikimedia.org/wiki/File:Gaelic-font-Gaelach.png
+*/
+html { margin: 0; padding: 0; }
+
+body {
+    height: 101%;
+    font-size: 95.5%;
+    font-family: "Trebuchet MS", Arial, Tahoma, sans-serif;
+    color: #444;
+    background: @bodyBGColor;
+    padding-top: 10px;
+}
+
+a {
+    color: #0040D0;
+    text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+h2 {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    color: #363636;
+    font-family: "Droid Serif", Georgia, serif;
+    font-size: 2.6em;
+    line-height: 1.8em;
+    font-weight: 500;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 12px 0;
+    text-align: center;
+}
+
+h3 {
+    letter-spacing: -0.04em;
+    font-weight: bold;
+    font-size: 1.44em;
+    margin-bottom: 10px;
+}
+.viewport{
+  max-width:70rem;
+  padding-top:1rem;
+  padding-left:4rem;
+  padding-right:4rem;
+  margin-right:auto;
+  margin-left:auto;
+
+}
+.page-header{
+  border:1px solid #ddd;
+  border-radius:8px;
+  min-height:6rem;
+}
+.btn-cmd{
+    background:transparent;
+    border:0;
+    color:#000080;
+}
+.btn-cmd:hover{
+    text-decoration:underline;
+    color:#c67605;
+}
+.btn-cmd:active{
+    text-decoration:underline;
+    text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
+}
+.global-nav-container{
+    float:right;
+}
+.nav-global-list{
+    list-style: none;
+
+}
+.nav-global-list li{
+    display:inline;
+}
+
+#editor {
+
+    height:40em;
+    width:50em;
+}
+.composer-editor-container{
+    position:relative;
+}
+
+.ac-container article{
+    overflow-y:scroll;
+}
+
+.row{
+    background-color:#ccc;
+}
+.composer-container h2{
+    font-size:1.2em;
+    padding-top:.1em;
+    padding-bottom:.1em;
+    margin-top:.1em;
+    margin-bottom:.1em;
+}
+
+#contextmenu{
+    margin:0;
+    padding:0;
+    border: 1px solid #000;
+    background:#ccc;
+    z-index: 4000;
+}
+#contextmenu li {
+    list-style-type:none;
+    margin:1px;
+    padding:2px;
+    cursor:pointer;
+}
+#contextmenu li.hover{
+    background: #ddd;
+}
+
+.drop-zone{
+    height:400px;
+    width:400px;
+    border:1px solid #444;
+    background-color:#999;
+}
+.test-layout{
+    padding:1em;
+    border:1px solid darkgreen;
+    background-color:#dbc59e;
+}
+.btn-post-control{
+    float:right;
+}
+.btn-close-preview{
+    display:none;
+}
+.input-post-title{
+    width:100%;
+}
+.view-heading.primary-view{
+  /*float:left;*/
+}
+.form-login{
+/*  float:left;*/
+}
+.header-home-link{
+  float:left;
+}

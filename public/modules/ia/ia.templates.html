@@ -1,0 +1,50 @@
+<div id="IAModuleTemplateContainer">
+
+    <!-- Home -->
+    <script id="IAIndexTemplate" type="text/template" >
+
+        <h1>IA Index</h1>
+
+    </script>
+
+    <script id="NavItemTemplate" type="text/template">
+        <a href="<%= S.href %>" data-i18n="<%= S.i18nKey %>"><%= S.name%></a>
+    </script>
+
+    <script id="IAMainNavTemplate" type="text/template" >
+
+
+
+        <ul>
+            <li>
+                <a href="#home"><span>Home</span></a>
+            </li>
+            <li>
+                <a href="#user"><span>Users</span></a>
+            </li>
+            <li>
+                <a href="#post"><span>Posts</span></a>
+            </li>
+            <li>
+                <a href="#admin"><span>Admin</span></a>
+            </li>
+        </ul>
+
+
+    </script>
+
+    <!-- Index -->
+    <script id="IAIndexLayoutTemplate" type="text/template" >
+
+        <div class="view-index ia-container ui-view" data-view="index-view">IA Index layout</div>
+
+    </script>
+
+    <!-- Global Navigation Container -->
+    <script id="IAGlobalNavTemplate" type="text/template" class="ui-template">
+        <nav class="global-nav-container nav-h">
+            <ul></ul>
+        </nav>
+    </script>
+
+</div>

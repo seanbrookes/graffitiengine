@@ -1,0 +1,45 @@
+<div id="AdminModuleTemplateContainer">
+
+    <!-- Templates -->
+    <script type="text/template" id="AdminModuleContainer" class="ui-template">
+        <div class="module-content-container ui-container">
+            <h1>Admin View</h1>
+            <div>
+                <button class="btn-list-pending">list pending accounts</button>
+            </div>
+            <div data-region="pendingAccounts">
+
+
+            </div>
+        </div>
+    </script>
+
+    <script id="AdminPendingAccountItemTemplate" type="text/template">
+        <a href="#"><%= S.userName %></a>  --  [ <a href="#" class="cmd-toggle-acctStatus" data-id="<%= S._id %>" data-status="<%= S.accountStatus %>"><%= S.accountStatus %></a> ]
+
+    </script>
+
+    <script id="AdminPendingAccountsTemplate" type="text/template">
+
+        <div class="pending-account-list-container">
+            <ul class="pending-account-list">
+
+            </ul>
+        </div>
+    </script>
+
+    <!-- Home -->
+    <script id="TplIndexTemplate" type="text/template" >
+
+        <h1>Tpl Index</h1>
+
+    </script>
+
+    <!-- Index -->
+    <script id="TplIndexLayoutTemplate" type="text/template" >
+
+        <div class="view-index tpl-container ui-view" data-view="index-view">Tpl Index layout</div>
+
+    </script>
+
+</div>

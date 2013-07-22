@@ -1,0 +1,142 @@
+<div id="PostModuleTemplateContainer">
+
+    <!-- Home -->
+    <script id="PostIndexTemplate" type="text/template" >
+
+        <div class="row">
+            <div class="half centered">
+                <div data-region="composerRegion"></div>
+                <div data-region="postListRegion"></div>
+
+            </div>
+        </div>
+    </script>
+
+    <!-- Post Editor Layout -->
+    <script id="PostEditorLayoutTemplate" type="text/template">
+        <h1>Post Editor</h1>
+        <button class="btn-close-preview btn-post-control">close preview</button>
+        <div class="post-preview"></div>
+
+        <form id="PostForm">
+            <fieldset>
+                <input id="PostId" name="PostId" type="hidden" />
+                <input id="PostUserId" name="PostUserId" type="hidden" />
+                <label id="PostSlug" ></label>
+                <input id="PostTitle" name="PostTitle" class="input-post-title" placeholder="post title" />
+                <div id="PostEditor" name="PostEditor" data-region="editorRegion"></div>
+                <select id="PostStatus" name="PostStatus" class="select-post-status" >
+                    <option value="draft">draft</option>
+                    <option value="published">published</option>
+                    <option value="deleted">deleted</option>
+                </select>
+            </fieldset>
+            <div class="form-controls-container" class="row">
+                <button class="btn-round btn-save btn-post-control btn-save-post">Save</button>
+                <button class="btn-round btn-reset btn-post-control btn-reset-post">Clear</button>
+                <button class="btn-round btn-preview btn-post-control btn-preview-post">preview</button>
+            </div>
+        </form>
+
+
+
+    </script>
+
+
+
+    <!-- Post Status Select -->
+    <script id="PostStatusSelectTemplate" type="text/template">
+        <select class="select-post-status" data-id="<%= S._id %>" data-status="<%= S.status %>" value="<%= S.status %>">
+            <option value="draft">draft</option>
+            <option value="published">published</option>
+            <option value="deleted">deleted</option>
+        </select>
+    </script>
+
+    <!-- Post Status Link -->
+    <script id="PostStatusCmdDisplay" type="text/template">
+        <button class="post-status btn-cmd" data-status="<%= S.status %>" data-id="<%= S._id%>"><%= S.status %></button>
+    </script>
+
+    <!-- Post List Item  -->
+    <script id="PostListItemTemplate" type="text/template">
+        <td><a href="#post/edit/<%= S.slug%>" data-id="<%= S._id %>" title="<%= S.title %>"><%= S.title %></a></td>
+        <td data-id="<%= S._id %>" class="col-post-status">
+            <button class="post-status btn-cmd" data-status="<%= S.status %>" data-id="<%= S._id%>"><%= S.status %></button>
+        </td>
+        <td><%= S.lastUpdate %></td>
+    </script>
+
+    <!-- Post List -->
+    <script id="PostListTemplate" type="text/template">
+        <h2><%= S.collectionTitle %></h2>
+        <table>
+            <thead>
+            <tr>
+                <th>title</th>
+                <th>status</th>
+                <th>last update</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </script>
+
+    <!-- Post Publish Dialog -->
+    <script id="PostPublishDialogTemplate" type="text/template">
+        <h2>Publish this post?</h2>
+        <label><%= S.title %></label>
+        <form>
+            <ul>
+                <li>
+                    <label for="InputPublishPostAuthor">Author:</label>
+                    <input id="InputPublishPostAuthor" name="InputPublishPostAuthor" value="<%= S.author %>" />
+                </li>
+                <li>
+                    <button class="btn btn-round" data-cmd="cancel">cancel</button>
+                    <button class="btn btn-round" data-cmd="publishPost" data-id="<%= S.id %>">publish</button>
+                </li>
+            </ul>
+        </form>
+    </script>
+
+
+    <!-- Recent Post List Item  -->
+    <script id="RecentPostListItemTemplate" type="text/template">
+        <h1 class="post-title-header">
+            <a href="/posts/<%= S.getPubYear(S.publishDate) %>/<%= S.slug %>.html" target="_new"><%= S.title %></a>
+        </h1>
+        <label class="publish-date"><span>published:</span> <%= S.publishDateRender(S.publishDate) %></label>
+        <div class="post-body">
+            <%= S.body %>
+        </div>
+        <ul class="post-attributes-list">
+            <li>
+                <label class="post-label-name">last update: <span class="post-label-value"><%= S.lastUpdate %></span></label>
+            </li>
+            <li>
+                <label class="post-label-name">author: <span  class="post-label-value"><%= S.author %></span></label>
+            </li>
+        </ul>
+        <hr />
+    </script>
+
+    <!-- Recent Post List -->
+    <script id="RecentPostListTemplate" type="text/template">
+
+        <h2><%= S.collectionTitle %></h2>
+        <ul class="recent-post-list"></ul>
+
+    </script>
+
+
+    <!-- Index -->
+    <script id="PostIndexLayoutTemplate" type="text/template" >
+
+        <div class="view-index post-container ui-view" data-view="index-view">Post Index layout</div>
+
+    </script>
+
+</div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>seanica</title>
+    <link rel="stylesheet" href="css/mocha.css" type="text/css" charset="utf-8" />
+</head>
+<body>
+    <!-- Required for browser reporter -->
+    <div id="mocha"></div>
+    
+    <!-- mocha -->
+    <script src="libs/mocha.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/testem.js"></script>
+    <script src="libs/chai.js" type="text/javascript" charset="utf-8"></script>
+    
+    <!-- Common config -->
+    <script src="/public/scripts/lib/require.js" type="text/javascript" charset="utf-8"></script>
+    <script src="config.test.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript" charset="utf-8">
+      require([
+          'mocha.common',
+          'jquery',
+          'backbone',
+          'marionette',
+          'specs/appInitTests.js',
+          'specs/postTests.js'
+      ], runMocha);
+    </script>
+
+</body>
+</html>
