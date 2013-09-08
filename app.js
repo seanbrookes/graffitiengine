@@ -1,5 +1,5 @@
 /**
- * Seanica
+ * fourfivesix
  *
  *
  * Basic bootstrap application based on mongo/node/backbone

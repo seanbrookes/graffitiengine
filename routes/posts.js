@@ -1,5 +1,5 @@
 /**
- * Seanica
+ * fourfivesix
 
  *
  * User: sean
@@ -254,9 +254,9 @@ exports.publishPost = function(req,res){
 
 
                 var targetConfig = {
-                    host:'www.seani.ca',
+                    host:'www.fourfivesix.ca',
                     port: '80',
-                    apiKey:'sdfaersdf23ewdf2wdfs5'
+                    apiKey:'sdfaersdf23ewdrrwdfs5'
                 };
 
                 var publishDoc;
@@ -315,7 +315,7 @@ exports.publishPost = function(req,res){
                     post_req.end();
 
 
-                    logger.info('| here | just before file wright AUTHOR: ' + post.author);
+                    logger.info('| here | just before file write AUTHOR: ' + post.author);
 
 
 
