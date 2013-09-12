@@ -5,6 +5,10 @@
  * Basic bootstrap application based on mongo/node/backbone
  *
  */
+require('strong-agent').profile(
+  '906551655c65c6cf56755e46f3dfff34',
+  ['fourfivesix']
+);
 var express = require('express');
 var http = require('http');
 var path = require('path');
