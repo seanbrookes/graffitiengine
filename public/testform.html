@@ -2,34 +2,26 @@
 <html>
 <head></head>
 <body>
-<form id="PostForm">
+<form id="PostForm" method="post" action="http://www.fourfivesix.ca/inbox.php">
     <fieldset>
         <label for="ApiKey">Api Key</label>
-        <input id="ApiKey" name="ApiKey">
+        <input id="ApiKey" name="ApiKey" value="sdfaersdf23ewdf2wdfs5">
         <br />
-        <label for="PostUserId">Author Key</label>
-        <input id="PostUserId" name="PostUserId">
+        <label for="PostPublishYear">Year</label>
+        <input id="PostPublishYear" name="PostPublishYear" value="2013">
+        <br />
+        <label for="PostPublishMonth">Month</label>
+        <input id="PostPublishMonth" name="PostPublishMonth" value="1">
         <br />
         <label for="PostSlug">Slug</label>
-        <input id="PostSlug" width="200" name="PostSlug">
+        <input id="PostSlug" width="200" name="PostSlug" value="test">
         <br />
-        <label for="PostTitle">Title</label>
-        <input id="PostTitle" width="200" name="PostTitle">
+        <label for="PostBody">Body</label>
+        <textarea name="PostBody" id="PostBody" rows="10" cols="60" name="PostBody"><p>hello world</p></textarea>
         <br />
-        <label for="PostTitle">Body</label>
-        <textarea id="PostBody" rows="40" cols="40" name="PostBody"></textarea>
-        <br />
-
-        <select id="PostStatus" name="PostStatus" class="select-post-status">
-            <option value="draft">draft</option>
-            <option value="published">published</option>
-            <option value="deleted">deleted</option>
-        </select>
     </fieldset>
     <div class="form-controls-container">
-        <button type="submit" class="btn-round btn-save btn-post-control btn-save-post">Save</button>
-        <button class="btn-round btn-reset btn-post-control btn-reset-post">Clear</button>
-        <button class="btn-round btn-preview btn-post-control btn-preview-post">preview</button>
+        <button type="submit" >POST</button>
     </div>
 </form>
 </body>
