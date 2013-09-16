@@ -50,19 +50,6 @@ define(['sf1','modules/app/app.models','modules/app/app.views','text!modules/app
 
                 // simplemodal-overlay DropZone
 
-
-
-
-
-
-
-
-
-
-
-
-
-
                 this.$el.modal({
 //                    overlayClose:true,
                     autoResize:true,
