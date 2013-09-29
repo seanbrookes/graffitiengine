@@ -203,12 +203,18 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
       editorMode = 'update';
       $('#PostId').val(post._id);
       $('#PostTitle').val(post.title);
-      $('#PostSlug').text(post.slug);
-      $('#wysihtml5-textarea').val(post.body);
+      $('#PostSlug').val(post.slug);
+      sf1.logger.info('||||');
+      sf1.logger.info('||||');
+      sf1.logger.info('||||    ATTEMPT TO ASSIGN THE VALUE HERE');
+      sf1.logger.info('||||');
+      sf1.logger.info('||||');
       var editor = new wysiwyg.Editor("wysihtml5-textarea", { // id of textarea element
         toolbar: "wysihtml5-toolbar", // id of toolbar element
         parserRules: wysiwygconfig // defined in parser rules set
       });
+      $('#wysihtml5-textarea').val(post.body);
+
 //            CKEDITOR.instances.wysihtml5-textarea.setData(post.body);
       $('#PostStatus').val(post.status);
 
