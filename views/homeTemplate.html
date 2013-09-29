@@ -5,30 +5,27 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width">
 
-        <title><%= title %> :. fourfivesix.ca</title>
+        <title>Home :. fourfivesix.ca</title>
 
         <link rel="stylesheet" type="text/css" href="/css/style.css">
     </head>
-    <body class="post-page">
+    <body class="home-page">
         <div class="viewport">
             <header class="page-header" data-region="pageHeaderRegion">
 
                 <a class="header-home-link" href="/" title="fourfivesix home">
                    home
                 </a>
-                <h1>fourfivesix</h1>
+                <h1 class="app-title">Four Five Six</h1>
 
             </header>
 
             <nav class="main-nav" data-region="mainNavRegion"></nav>
 
             <div class="main" role="main">
-                <article class="main-article" data-region="mainArticleRegion">
-                    <h1 class="article-title"><%= title %></h1>
-                    <label class="post-publish-date"><span>published:</span> <%= publishDate %></label>
-                    <label class="post-author"><span>author:</span> <%= author %></label>
-                    <%= body %>
-                </article>
+                <div class="article-list-container" data-region="articleListRegion">
+                    <%= markup %>
+                </div>
                 <aside class="main-aside" data-region="asideDataRegion"></aside>
             </div>
 

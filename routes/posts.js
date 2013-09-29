@@ -149,6 +149,7 @@ exports.addPost = function (req, res) {
       title: postTitle,
       slug: getSlug(postTitle),
       summary: postSummary,
+      version: 0,
       body: postBody,
       status: status
 
@@ -208,11 +209,131 @@ function renderDate(dateInput, format) {
   return retVal;
 }
 
+exports.supersedePost = function(req,res){
+  var postId = req.param('id', null);
+  logger.info('|');
+  logger.info('|');
+  logger.info('|  SUPERSEDE POST: ' + postId);
+  logger.info('|');
+  logger.info('|');
+
+  if (postId){
+    // find the original post
+    Post.findById(postId, function (err, post) {
+      if (err) {
+        logger.error('error requesing post for edit: ' + err);
+        return res.send(500, err);
+      }
+      var originalVerion = 1;
+      if (post.version){
+        originalVersion = post.version;
+      }
+
+      var supersededTitle = post.title + ' version ' + originalVersion;
+     // post.title = supersededTitle;
+      // create new slug on original document
+      //post.slug = getSlug(supersededTitle);
+
+
+      if (!post.version){
+        post.version = 1;
+      }
+      // get the slug from the original - this will be the slug on new document
+      var originalSlug = post.slug;
+      var originalTitle = post.title;
+      // get the version number from the original
+      var originalVersion = post.version;
+      // clone the original document to make a new document
+
+      // create new title on original document based on 'version ' plus version number
+      var supersededTitle = post.title + ' version ' + originalVersion;
+      var supersededSlug = getSlug(supersededTitle);
+      //post.title = supersededTitle;
+      // create new slug on original document
+      //post.slug = getSlug(supersededTitle);
+      // change status on original to 'superseded'
+      //post.status = 'superseded';
+      // generate prepend message for original document
+      var publishYear = new Date(post.publishDate).getFullYear();
+      var publishMonth = (new Date(post.publishDate).getMonth() + 1);
+
+      // get link to original document
+      var postUrl = '/posts/' + publishYear + '/' + publishMonth + '/' + originalSlug + '.html';
+      var supersededMessage = '<p class="supersession-message">This document has been superseded by an updated version the latest version can be found here:<a href="' + postUrl +'" target="_new">' + originalTitle + '</a></p>';
+      // prepend update message fragment to post body on original document
+      var supersededBody = supersededMessage + post.body;
+
+      var supersededUrl = '/posts/' + publishYear + '/' + publishMonth + '/' + supersededSlug + '.html';
+
+      // generate update fragment for new doc
+      var orderVersionMessage = '<ul class="supersession-message"><li>Previous version: <a href="' + supersededUrl +'" target="_new">' + post.title + '</a></li></ul>';
+
+
+
+      var supersedeModel = new Post({
+        userId: post.userId,
+        title: supersededTitle,
+        slug: supersededSlug,
+        summary: post.summary,
+        version: originalVersion,
+        body: supersededBody,
+        publishDate: post.publishDate,
+        status: 'superseded'
+
+      });
+
+
+
+      // append update fragment to new doc
+      post.body = post.body + orderVersionMessage;
+
+      // update version on new document
+      post.version += 1;
+      // update the status to 'pendingedits'
+      post.status = 'pendingedits';
+      // save original document
+      //logger.info('Prepare to save post: ' + JSON.stringify(supersedeModel));
+      supersedeModel.save(function(err,doc){
+        if(err){
+          return res.send(500,'Error saving superseded post: ' + err);
+        }
+        // post it to the site
+        postPost(req,res,doc);
+
+        // save new document
+//        logger.info('|');
+//        logger.info('|');
+//        logger.info('|');
+//        logger.info('|');
+//        logger.info('Prepare to save new post: ' + JSON.stringify(post));
+//        logger.info('|');
+//        logger.info('|');
+//        logger.info('|');
+//        logger.info('|');
+//        logger.info('|');
+//        logger.info('|');
+
+        post.save(function(err,doc){
+          if (err){
+            return res.send(500,'Error saving new version of document: ' + err);
+          }
+          // return it in the response
+          return res.send(doc);
+        });
+
+      });
+    });
+  }
+  else{
+    return res.send(400, 'no id supplied');
+  }
+
+
+};
 
 exports.publishPost = function (req, res) {
   var postId = req.param('id', null);
   var postAuthor = req.param('author', null);
-  logger.info('author: ' + postAuthor);
   if (!postId) {
     return res.send(400);
   }
@@ -232,29 +353,30 @@ exports.publishPost = function (req, res) {
     post.slug = getSlug(post.title);
 
     post.status = 'published';
+    if (post.version){
+      post.version += 1;
+    }
+    else{
+      post.version = 1;
+    }
 
     post.publishDate = Date.now();
     post.lastUpdate = Date.now();
 
-    logger.info('| here | SAVE POST PUBLISH AUTHOR: ' + post.author);
+//    logger.info('| here | SAVE POST PUBLISH AUTHOR: ' + post.author);
     post.save(function (err) {
       if (err) {
         logger.error('error saving post: ' + err);
         return res.send(500, 'error saving post: ' + err);
       }
-      logger.info('saved published post author' + post.author);
+     // logger.info('saved published post author' + post.author);
 
       User.findById(post.userId, function (err, user) {
         //post.author = user.userName;
-        logger.info('| here | just before POSTING: ' + post.slug);
+     //   logger.info('| here | just before POSTING: ' + post.slug);
 
 
-        var targetConfig = {
-          host: 'www.fourfivesix.ca',
-          port: '80',
-          path: '/inbox.php',
-          apiKey: 'sdfaersdf23ewdrrwdfs5'
-        };
+
 //        var targetConfig = {
 //          host: 'localhost',
 //          port: '8888',
@@ -262,103 +384,9 @@ exports.publishPost = function (req, res) {
 //          apiKey: 'sdfaersdf23ewdrrwdfs5'
 //        };
 
-        var publishDoc;
 
-        fs.readFile('./views/postTemplate.html', 'utf8', function (err, template) {
-          if (err) {
-            return logger.error(err);
-          }
-          var pubDate = new Date(post.publishDate);
-          post.publishDate = renderDate(post.publishDate);
-          logger.info('|');
-          logger.info('|');
-          logger.info('|     publishDate Date: ' + post.publishDate);
-          logger.info('|');
-          logger.info('|');
-          logger.info('|');
-          logger.info('|');
-          logger.info('|');
-          logger.info('|     Raw Date: ' + post.publishDate);
-          logger.info('|');
-          logger.info('|');
-          logger.info('|');
-          logger.info('|');
-          logger.info('|     Next Date [year]: ' + new Date(post.publishDate).getFullYear());
-          logger.info('|');
-          logger.info('|');
+        postPost(req,res,post);
 
-
-          post.publishYear = pubDate.getFullYear();
-          post.publishMonth = (pubDate.getMonth() + 1);
-          logger.info('|');
-          logger.info('|');
-          logger.info('|     Post Year 1: ' + post.publishYear);
-          logger.info('|');
-          logger.info('|     Post Month 1:  ' + post.publishMonth);
-          logger.info('|');
-          logger.info('|');
-          //logger.info('readFile  ' + template);
-//                    var filePath = './public/posts/2013/';
-//                    var fileName = post.slug + '.html';
-          publishDoc = _.template(template, post);
-          //fs.writeFileSync( './public/posts/2013/' + post.slug + '.html', _.template( template, { title: post.title,body:post.body } ) );
-//          logger.info('| here |  the doc to post: ' + publishDoc);
-
-          var post_data = querystring.stringify({
-            'ApiKey': targetConfig.apiKey,
-            'PostPublishYear': post.publishYear,
-            'PostPublishMonth': post.publishMonth,
-            'PostSlug': post.slug,
-            'PostBody': publishDoc
-          });
-
-          logger.info('|');
-          logger.info('|');
-          logger.info('|     Post Year: ' + post.publishYear);
-          logger.info('|');
-          logger.info('|     Post Month:  ' + post.publishMonth);
-          logger.info('|');
-          logger.info('|');
-
-
-          // An object of options to indicate where to post to
-          var post_options = {
-            host: targetConfig.host,
-            port: targetConfig.port,
-            path: targetConfig.path,
-//            path: '/inbox.php',
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Content-Length': post_data.length
-            }
-          };
-
-
-          // Set up the request
-          /*
-           *
-           *
-           *  POST PUBLISH DOCUMENT TO INBOX
-           *
-           * Request
-           *
-           *
-           * */
-
-          //logger.info('| here |  the doc to post: ' + publishDoc);
-          var post_req = http.request(post_options, function (res) {
-            res.setEncoding('utf8');
-            res.on('data', function (chunk) {
-              logger.info('| ');
-              logger.info('Response: ' + chunk);
-              logger.info('| ');
-            });
-          });
-          post_req.write(post_data);
-          post_req.end();
-
-        });
         return res.send(200);
       });
       return res.send(200);
@@ -368,6 +396,84 @@ exports.publishPost = function (req, res) {
 
   });
 };
+function postPost(req,res,post){
+
+
+  var targetConfig = {
+    host: 'www.fourfivesix.ca',
+    port: '80',
+    path: '/inbox.php',
+    apiKey: 'sdfaersdf23esdfa33adfasdfwdrrwdfs5'
+  };
+  var publishDoc;
+  fs.readFile('./views/postTemplate.html', 'utf8', function (err, template) {
+    if (err) {
+      return logger.error(err);
+    }
+    var pubDate = new Date(post.publishDate);
+    post.publishDate = renderDate(post.publishDate);
+
+
+
+    post.publishYear = pubDate.getFullYear();
+    post.publishMonth = (pubDate.getMonth() + 1);
+
+    //logger.info('readFile  ' + template);
+//                    var filePath = './public/posts/2013/';
+//                    var fileName = post.slug + '.html';
+    publishDoc = _.template(template, post);
+    //fs.writeFileSync( './public/posts/2013/' + post.slug + '.html', _.template( template, { title: post.title,body:post.body } ) );
+//          logger.info('| here |  the doc to post: ' + publishDoc);
+
+    var post_data = querystring.stringify({
+      'ApiKey': targetConfig.apiKey,
+      'PostPublishYear': post.publishYear,
+      'PostPublishMonth': post.publishMonth,
+      'PostSlug': post.slug,
+      'PostBody': publishDoc
+    });
+
+
+
+    // An object of options to indicate where to post to
+    var post_options = {
+      host: targetConfig.host,
+      port: targetConfig.port,
+      path: targetConfig.path,
+//            path: '/inbox.php',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': post_data.length
+      }
+    };
+
+
+    // Set up the request
+    /*
+     *
+     *
+     *  POST PUBLISH DOCUMENT TO INBOX
+     *
+     * Request
+     *
+     *
+     * */
+
+    //logger.info('| here |  the doc to post: ' + publishDoc);
+    var post_req = http.request(post_options, function (res) {
+      res.setEncoding('utf8');
+      res.on('data', function (chunk) {
+        //logger.info('| ');
+        logger.info('Response: ' + chunk);
+        //logger.info('| ');
+      });
+    });
+    post_req.write(post_data);
+    post_req.end();
+
+  });
+}
 /*
  *
  *
@@ -394,13 +500,13 @@ function writePublishedFile(post, successCallback, errorCallback) {
     var fileName = post.slug + '.html';
     var fileContent = _.template(template, post);
     //fs.writeFileSync( './public/posts/2013/' + post.slug + '.html', _.template( template, { title: post.title,body:post.body } ) );
-    logger.info('| here |  file wright AUTHOR: ' + post.author);
+  //  logger.info('| here |  file wright AUTHOR: ' + post.author);
 
     fs.writeFile(filePath + fileName, fileContent, function (err) {
       if (err) {
         logger.error('Error writing file' + err);
       }
-      logger.info('It\'s saved! ' + post.title);
+      //logger.info('It\'s saved! ' + post.title);
     });
 
     //fileGuts.filename = __dirname + '/placemark.ejs';
@@ -412,7 +518,126 @@ function writePublishedFile(post, successCallback, errorCallback) {
   // if error call error function
   // if not then call the success
 }
+/*
+*
+*   GENERATE HOME PAGE
+*
+* */
+exports.generateHomePage = function(req,res){
+  fs.readFile('./views/homeTemplate.html', 'utf8', function (err, template) {
+    if (err) {
+      return logger.error(err);
+    }
+    var targetConfig = {
+      host: 'www.fourfivesix.ca',
+      port: '80',
+      path: '/homepage.php',
+      apiKey: 'sdfaersdf23esdfa33adfasdfwdrrwdfs5'
+    };
+//    var targetConfig = {
+//      host: 'localhost',
+//      port: '8888',
+//      path: 'fourfivesixtest/homepage.php',
+//      apiKey: 'sdfaersdf23ewdrrwdfs5'
+//    };
 
+    var posts = [];
+
+    Post.find({status: 'published'}).sort({lastUpdate: -1}).execFind(function (err, dox) {
+      if (err) {
+        return res.send(500, err);
+      }
+      if (dox){
+        var listMarkup = '<ul>';
+
+        for (var i = 0;i < dox.length;i++){
+          listMarkup += '<li>';
+          var pDate = new Date(dox[i].publishDate);
+          var pubYear = pDate.getFullYear();
+          var pubMonth = (pDate.getMonth() + 1);
+          var postLink = 'posts/' + pubYear + '/' + pubMonth + '/' + dox[i].slug + '.html';
+          listMarkup += '<a href="' + postLink + '">';
+          listMarkup += dox[i].title;
+          listMarkup += '</a>';
+          listMarkup += '</li>';
+        }
+        listMarkup += '</ul>';
+
+        var markup = {markup:listMarkup};
+
+        var publishDoc = _.template(template, markup);
+
+        var post_data = querystring.stringify({
+          'ApiKey': targetConfig.apiKey,
+          'PostBody': publishDoc
+        });
+
+        logger.info('|');
+        logger.info('|');
+        logger.info('| post_data  ' + post_data);
+        logger.info('|');
+        logger.info('|');
+
+
+        // An object of options to indicate where to post to
+        var post_options = {
+          host: targetConfig.host,
+          port: targetConfig.port,
+          path: targetConfig.path,
+//            path: '/inbox.php',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': post_data.length
+          }
+        };
+
+
+        logger.info('|');
+        logger.info('|');
+        logger.info('| post_options  ' + JSON.stringify(post_options));
+        logger.info('|');
+        logger.info('|');
+
+
+        // Set up the request
+        /*
+         *
+         *
+         *  POST PUBLISH DOCUMENT TO INBOX
+         *
+         * Request
+         *
+         *
+         * */
+
+        //logger.info('| here |  the doc to post: ' + publishDoc);
+        var post_req = http.request(post_options, function (res) {
+          res.setEncoding('utf8');
+          res.on('data', function (chunk) {
+            //logger.info('| ');
+            logger.info('Response --- : ' + chunk);
+            //logger.info('| ');
+          });
+        });
+        post_req.write(post_data);
+        logger.info('POST REQ - ' + post_data);
+        post_req.end();
+
+        return res.send(dox);
+
+
+
+      }
+      return res.send('No published documents were found');
+
+    });
+
+
+
+
+  });
+};
 
 /*
  *
@@ -433,6 +658,11 @@ exports.updatePost = function (req, res) {
     var postStatus = req.param('status', null);
     var postSummary = req.param('summary', null);
     var postBody = req.param('body', null);
+    logger.info('| ');
+    logger.info('| ');
+    logger.info('POST BODU: ' + postBody);
+    logger.info('| ');
+    logger.info('| ');
     if (postTitle) {
       post.title = postTitle;
     }
@@ -457,7 +687,22 @@ exports.updatePost = function (req, res) {
 
   });
 };
+// this should be converted to a disabled state instead of full delete
+// keep as full delete while in development
 exports.deletePost = function (req, res) {
+  var postId = req.param('id', null);
+  if (!postId) {
+    return res.send(400);
+  }
+//  Post.remove({_id: postId}, function (err) {
+//    if (err) {
+//      return res.send(500, err);
+//    }
+//    return res.send(200);
+//  });
+  return res.send(400);
+};
+exports.hardDelete = function (req, res) {
   var postId = req.param('id', null);
   if (!postId) {
     return res.send(400);
@@ -468,4 +713,5 @@ exports.deletePost = function (req, res) {
     }
     return res.send(200);
   });
+//  return res.send(400);
 };

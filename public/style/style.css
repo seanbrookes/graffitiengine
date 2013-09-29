@@ -2050,189 +2050,364 @@ a.error:hover {
   margin-top: -40px;
   top: 50%;
 }
-/* -------------------------------------------------------------------
-// markItUp! Universal MarkUp Engine, JQuery plugin
-// By Jay Salvat - http://markitup.jaysalvat.com/
-// ------------------------------------------------------------------*/
-.markItUp * {
-  margin: 0px;
-  padding: 0px;
-  outline: none;
+html {
+  background: transparent;
 }
-.markItUp a:link,
-.markItUp a:visited {
-  color: #000;
-  text-decoration: none;
+body {
+  margin-bottom: 25px;
+  font-family: Helvetica, Arial, Verdana !important;
 }
-.markItUp {
-  width: 700px;
-  margin: 5px 0 5px 0;
-  border: 5px solid #F5F5F5;
+h1,
+h2 {
+  line-height: 1;
+  font-family: Rockwell, "Courier New", Courier, Georgia;
+  border-bottom: 1px solid #999;
+  font-weight: bold;
+  margin: 0 5px 25px 0;
+  padding: 0 0 8px;
 }
-.markItUpContainer {
-  border: 1px solid #3C769D;
-  background: #ffffff url(images/markitup/bg-container.png) repeat-x top left;
-  padding: 5px 5px 2px 5px;
-  font: 11px Verdana, Arial, Helvetica, sans-serif;
+h1 {
+  font-size: 27px;
 }
-.markItUpEditor {
-  font: 12px 'Courier New', Courier, monospace;
-  padding: 5px 5px 5px 35px;
-  border: 3px solid #3C769D;
-  width: 643px;
-  height: 320px;
-  background: #ffffff url(images/markitup/bg-editor.png) no-repeat;
-  clear: both;
-  line-height: 18px;
-  overflow: auto;
+h2 {
+  font-size: 18px;
 }
-.markItUpPreviewFrame {
-  overflow: auto;
-  background-color: #FFFFFF;
-  border: 1px solid #3C769D;
-  width: 99.9%;
-  height: 300px;
-  margin: 5px 0;
+p,
+li {
+  line-height: 1.5;
 }
-.markItUpFooter {
-  width: 100%;
-  cursor: n-resize;
+p,
+ul,
+ol {
+  padding-bottom: 25px;
 }
-.markItUpResizeHandle {
+a {
+  color: inherit;
+}
+strong,
+b {
+  font-weight: bold;
+}
+i,
+em {
+  font-style: italic;
+}
+li {
+  margin-left: 30px;
+}
+ul li {
+  list-style: disc outside;
+}
+ol li {
+  list-style: decimal outside;
+}
+li img {
+  vertical-align: middle;
+  margin: 2px 5px 5px 0;
+}
+.wysiwyg-color-black {
+  color: black;
+}
+.wysiwyg-color-silver {
+  color: silver;
+}
+.wysiwyg-color-gray {
+  color: gray;
+}
+.wysiwyg-color-white {
+  color: white;
+}
+.wysiwyg-color-maroon {
+  color: maroon;
+}
+.wysiwyg-color-red {
+  color: red;
+}
+.wysiwyg-color-purple {
+  color: purple;
+}
+.wysiwyg-color-fuchsia {
+  color: fuchsia;
+}
+.wysiwyg-color-green {
+  color: green;
+}
+.wysiwyg-color-lime {
+  color: lime;
+}
+.wysiwyg-color-olive {
+  color: olive;
+}
+.wysiwyg-color-yellow {
+  color: yellow;
+}
+.wysiwyg-color-navy {
+  color: navy;
+}
+.wysiwyg-color-blue {
+  color: blue;
+}
+.wysiwyg-color-teal {
+  color: teal;
+}
+.wysiwyg-color-aqua {
+  color: aqua;
+}
+iframe.wysihtml5-sandbox html {
   overflow: hidden;
-  width: 22px;
-  height: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  background-image: url(images/markitup/handle.png);
-  cursor: n-resize;
 }
-/***************************************************************************************/
-/* first row of buttons */
-.markItUpHeader ul li {
-  list-style: none;
-  float: left;
+iframe.wysihtml5-sandbox html {
+  background: url(images/wysiwyg/bg_pattern_r1.png);
+  height: 100%;
+}
+iframe.wysihtml5-sandbox body {
+  width: 1200px;
+  min-height: 100%;
+  margin: 0 auto;
+  font-family: Helvetica, Arial, Verdana;
+}
+iframe.wysihtml5-sandbox strong {
+  font-weight: bold;
+}
+.get-started {
+  margin: 20px 0;
+  color: #666;
+  font-size: 11px;
+  text-align: center;
+}
+.get-started a {
+  color: #666;
+}
+#wysihtml5-editor-toolbar {
   position: relative;
 }
-.markItUpHeader ul li ul {
-  display: none;
-}
-.markItUpHeader ul li:hover > ul {
+iframe.wysihtml5-sandbox header {
   display: block;
+  border-radius: 4px;
+  width: 810px;
+  background: #eee;
+  position: relative;
+  z-index: 1;
+  background-image: linear-gradient(bottom, #eeeeee 0%, #ffffff 100%);
+  background-image: -o-linear-gradient(bottom, #eeeeee 0%, #ffffff 100%);
+  background-image: -moz-linear-gradient(bottom, #eeeeee 0%, #ffffff 100%);
+  background-image: -webkit-linear-gradient(bottom, #eeeeee 0%, #ffffff 100%);
+  background-image: -ms-linear-gradient(bottom, #eeeeee 0%, #ffffff 100%);
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+  font-size: 0;
+  text-align: center;
 }
-.markItUpHeader ul .markItUpDropMenu {
-  background: transparent url(images/markitup/menu.png) no-repeat 115% 50%;
-  margin-right: 5px;
+.commands {
+  border-left: 1px solid #ddd;
+  display: inline-block;
 }
-.markItUpHeader ul .markItUpDropMenu li {
-  margin-right: 0px;
+[data-wysihtml5-command],
+[data-wysihtml5-action],
+.fore-color {
+  position: relative;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #fff;
+  list-style: none;
+  font-size: 12px;
+  display: inline-block;
+  cursor: pointer;
+  height: 40px;
+  width: 68px;
 }
-.markItUpHeader ul .markItUpSeparator {
-  margin: 0 10px;
-  width: 1px;
-  height: 16px;
-  overflow: hidden;
-  background-color: #CCC;
-}
-.markItUpHeader ul ul .markItUpSeparator {
-  width: auto;
-  height: 1px;
-  margin: 0px;
-}
-/* next rows of buttons */
-.markItUpHeader ul ul {
-  display: none;
-  position: absolute;
-  top: 18px;
-  left: 0px;
-  background: #F5F5F5;
-  border: 1px solid #3C769D;
-  height: inherit;
-}
-.markItUpHeader ul ul li {
-  float: none;
-  border-bottom: 1px solid #3C769D;
-}
-.markItUpHeader ul ul .markItUpDropMenu {
-  background: #f5f5f5 url(images/markitup/submenu.png) no-repeat 100% 50%;
-}
-/* next rows of buttons */
-.markItUpHeader ul ul ul {
-  position: absolute;
-  top: -1px;
-  left: 150px;
-}
-.markItUpHeader ul ul ul li {
-  float: none;
-}
-.markItUpHeader ul a {
-  display: block;
-  width: 16px;
-  height: 16px;
-  text-indent: -10000px;
+[data-wysihtml5-command]::after,
+[data-wysihtml5-action]::after,
+.fore-color::after {
+  content: "";
+  background-image: url(images/wysiwyg/spr_toolbar_icons_r1.png);
   background-repeat: no-repeat;
-  padding: 3px;
-  margin: 0px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
-.markItUpHeader ul ul a {
+[data-wysihtml5-command]:hover,
+[data-wysihtml5-action]:hover,
+.fore-color:hover {
+  background-image: linear-gradient(bottom, #e5f0e2 0%, #ffffff 100%);
+  background-image: -o-linear-gradient(bottom, #e5f0e2 0%, #ffffff 100%);
+  background-image: -moz-linear-gradient(bottom, #e5f0e2 0%, #ffffff 100%);
+  background-image: -webkit-linear-gradient(bottom, #e5f0e2 0%, #ffffff 100%);
+  background-image: -ms-linear-gradient(bottom, #e5f0e2 0%, #ffffff 100%);
+}
+[data-wysihtml5-command="bold"]::after {
+  background-position: 24px center;
+}
+[data-wysihtml5-command="italic"]::after {
+  background-position: -48px center;
+}
+[data-wysihtml5-command="insertUnorderedList"]::after {
+  background-position: -115px center;
+}
+[data-wysihtml5-command="insertOrderedList"]::after {
+  background-position: -197px center;
+}
+[data-wysihtml5-command="formatBlock"][data-wysihtml5-command-value="h1"]::after {
+  background-position: -344px center;
+}
+[data-wysihtml5-command="formatBlock"][data-wysihtml5-command-value="h2"]::after {
+  background-position: -428px center;
+}
+[data-wysihtml5-command="createLink"]::after {
+  background-position: -271px center;
+}
+[data-wysihtml5-command="insertImage"]::after {
+  background-position: -513px center;
+}
+.fore-color::after {
+  background-position: -741px center;
+}
+[data-wysihtml5-command="insertSpeech"]::after {
+  background-position: -596px center;
+}
+[data-wysihtml5-action="change_view"]::after {
+  background-position: -670px center;
+}
+.fore-color ul {
+  display: none;
+  position: absolute;
+  z-index: 2;
+  top: 40px;
+  right: -1px;
+  left: -2px;
+  border: 1px solid #ccc;
+  border-top: 0;
+  background: #fff;
+  overflow: hidden;
+}
+.fore-color li {
   display: block;
-  padding-left: 0px;
-  text-indent: 0;
-  width: 120px;
-  padding: 5px 5px 5px 25px;
-  background-position: 2px 50%;
+  margin: 3px;
+  width: auto;
+  border: 0;
+  height: 15px;
 }
-.markItUpHeader ul ul a:hover {
-  color: #FFF;
-  background-color: #3C769D;
+.fore-color li::after {
+  display: none;
 }
-/***************************************************************************************/
-.html .markItUpEditor {
-  background-image: url(images/markitup/bg-editor-html.png);
+.fore-color:hover ul {
+  display: block;
 }
-.markdown .markItUpEditor {
-  background-image: url(images/markitup/bg-editor-markdown.png);
+.fore-color [data-wysihtml5-command-value="silver"] {
+  background: silver !important;
 }
-.textile .markItUpEditor {
-  background-image: url(images/markitup/bg-editor-textile.png);
+.fore-color [data-wysihtml5-command-value="gray"] {
+  background: gray !important;
 }
-.bbcode .markItUpEditor {
-  background-image: url(images/markitup/bg-editor-bbcode.png);
+.fore-color [data-wysihtml5-command-value="maroon"] {
+  background: maroon !important;
 }
-.wiki .markItUpEditor,
-.dotclear .markItUpEditor {
-  background-image: url(images/markitup/bg-editor-wiki.png);
+.fore-color [data-wysihtml5-command-value="red"] {
+  background: red !important;
 }
-/* -------------------------------------------------------------------
-// markItUp!
-// By Jay Salvat - http://markitup.jaysalvat.com/
-// ------------------------------------------------------------------*/
-.markItUp .markItUpButton1 a {
-  background-image: url(images/markitup/bold.png);
+.fore-color [data-wysihtml5-command-value="purple"] {
+  background: purple !important;
 }
-.markItUp .markItUpButton2 a {
-  background-image: url(images/markitup/italic.png);
+.fore-color [data-wysihtml5-command-value="green"] {
+  background: green !important;
 }
-.markItUp .markItUpButton3 a {
-  background-image: url(images/markitup/stroke.png);
+.fore-color [data-wysihtml5-command-value="olive"] {
+  background: olive !important;
 }
-.markItUp .markItUpButton4 a {
-  background-image: url(images/markitup/list-bullet.png);
+.fore-color [data-wysihtml5-command-value="navy"] {
+  background: navy !important;
 }
-.markItUp .markItUpButton5 a {
-  background-image: url(images/markitup/list-numeric.png);
+.fore-color [data-wysihtml5-command-value="blue"] {
+  background: blue !important;
 }
-.markItUp .markItUpButton6 a {
-  background-image: url(images/markitup/picture.png);
+.fore-color .wysihtml5-command-active {
+  outline: 1px solid #666;
+  outline-offset: 1px;
 }
-.markItUp .markItUpButton7 a {
-  background-image: url(images/markitup/link.png);
+.wysihtml5-commands-disabled .fore-color ul {
+  display: none;
 }
-.markItUp .markItUpButton8 a {
-  background-image: url(images/markitup/clean.png);
+.wysihtml5-action-active,
+.wysihtml5-command-active {
+  box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.2);
+  background: #eee !important;
 }
-.markItUp .preview a {
-  background-image: url(images/markitup/preview.png);
+.wysihtml5-commands-disabled [data-wysihtml5-command],
+.wysihtml5-commands-disabled .fore-color {
+  opacity: 0.4;
+  cursor: default;
+  background-image: none !important;
+}
+[data-wysihtml5-dialog] {
+  color: #333;
+  font-size: 14px;
+  text-align: left;
+  border-radius: 4px;
+  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  background: #FFFBE0;
+  position: absolute;
+  width: 810px;
+  text-align: center;
+  top: 45px;
+}
+[data-wysihtml5-dialog] input {
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 3px;
+  width: 300px;
+}
+[data-wysihtml5-dialog] input:focus {
+  outline: 0;
+  border: 1px solid #666;
+}
+[data-wysihtml5-dialog-action] {
+  padding: 4px;
+  color: #fff;
+  cursor: pointer;
+}
+[data-wysihtml5-dialog-action="save"] {
+  background: #007200;
+}
+[data-wysihtml5-dialog-action="cancel"] {
+  background: #999;
+}
+section {
+  position: absolute;
+  width: 810px;
+  top: 139px;
+  bottom: 0;
+}
+textarea {
+  font-family: "Courier New", Courier, monospace;
+  width: 100%;
+  background: transparent;
+  height: 100%;
+  border: 0;
+  white-space: pre;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 10px;
+  word-wrap: normal;
+  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+textarea:focus {
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.4);
+  outline: 0;
+}
+a.fork {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
 }
 /** basic default styles *
 
@@ -2378,4 +2553,8 @@ h3 {
 }
 .header-home-link {
   float: left;
+}
+textarea#wysihtml5-textarea {
+  height: 500px;
+  width: 1000px;
 }

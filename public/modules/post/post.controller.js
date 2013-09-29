@@ -33,6 +33,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
         el: ".view-index"
       });
 
+
       targetLayoutView.on('show', function (layout) {
         indexContainerRegion.show(indexView);
         var editorRegion = new Marionette.Region({
@@ -43,7 +44,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
         });
         composerRegion.show(new View.PostEditorLayout());
         editorRegion.show(new RTE.RTE());
-        $('#sf1RTEEditor').on('keyup', function (event) {
+        $('#wysihtml5-textarea').on('keyup', function (event) {
           sf1.EventBus.trigger('post.previewPostRequest');
         });
         // check if slug passed in
@@ -57,6 +58,13 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
 
 
         }
+
+        var postControlsRegion = new Marionette.Region({
+          el: '[data-region="postControlsRegion"]'
+        });
+
+
+        postControlsRegion.show(new View.PostControlsView());
 
       });
       //targetLayoutView.container.show(targetView);
@@ -121,6 +129,11 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
         model: new Model.PostModel(options.data)
       });
     }
+    function supersedePostDialog(options) {
+      return new View.SupersedePostDialog({
+        model: new Model.PostModel(options.data)
+      });
+    }
 
 
     /*
@@ -158,6 +171,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
     sf1.EventBus.bind('post.loadUserPosts', function (userId) {
       if (userId) {
         var postCollection = new Model.PostCollection();
+        // var postsUrl = '/recentposts';
         var postsUrl = '/userposts/' + userId;
         postCollection.fetch({
           url: postsUrl,
@@ -190,8 +204,8 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
       $('#PostId').val(post._id);
       $('#PostTitle').val(post.title);
       $('#PostSlug').text(post.slug);
-      $('#sf1RTEEditor').val(post.body);
-//            CKEDITOR.instances.sf1RTEEditor.setData(post.body);
+      $('#wysihtml5-textarea').val(post.body);
+//            CKEDITOR.instances.wysihtml5-textarea.setData(post.body);
       $('#PostStatus').val(post.status);
 
     });
@@ -224,13 +238,14 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * */
     sf1.EventBus.bind('post.savePostButtonClicked', function (event) {
       sf1.logger.info('save post button click event');
-      sf1.logger.info('Post Contents: ' + $('#sf1RTEEditor').val());
+      sf1.logger.info('Post Contents: ' + $('#wysihtml5-textarea').val());
       if (userId) {
         var postObj = {};
         postObj.userId = userId;
         postObj.title = $('#PostTitle').val();
-        postObj.body = $('#sf1RTEEditor').val();
+
         if ('new' === editorMode) {
+          postObj.body = '<div class="post-body">' + $('#wysihtml5-textarea').val() + '</div>';
           postObj.status = 'draft';
           // save new post
           sf1.io.ajax({
@@ -247,6 +262,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
 
         }
         if ('update' === editorMode) {
+          postObj.body = $('#wysihtml5-textarea').val();
           var postId = $('#PostId').val();
 
 
@@ -289,8 +305,8 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      *
      * */
     sf1.EventBus.bind('post.previewPostRequest', function () {
-      sf1.logger.info('Post Contents: ' + $('#sf1RTEEditor').val());
-      var postData = $('#sf1RTEEditor').val();
+      sf1.logger.info('Post Contents: ' + $('#wysihtml5-textarea').val());
+      var postData = $('#wysihtml5-textarea').val();
       if (postData) {
         $('.btn-close-preview').show();
         $('.post-preview').html(postData);
@@ -303,7 +319,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * */
     sf1.EventBus.bind('post.resetPostButtonClicked', function (event) {
       sf1.logger.info('Reset post button click event');
-      sf1.logger.info('Post Contents: ' + $('#sf1RTEEditor').val());
+      sf1.logger.info('Post Contents: ' + $('#wysihtml5-textarea').val());
     });
     /*
      *
@@ -312,7 +328,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * */
     sf1.EventBus.bind('post.closePostPreviewButtonClicked', function (event) {
       sf1.logger.info('close preview post button click event');
-      sf1.logger.info('Post Contents: ' + $('#sf1RTEEditor').val());
+      sf1.logger.info('Post Contents: ' + $('#wysihtml5-textarea').val());
       $('.btn-close-preview').hide();
       $('.post-preview').empty();
     });
@@ -368,6 +384,19 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
           case 'published':
 
             sf1.EventBus.trigger('post.publishPostDialogRequest', postData);
+
+
+            break;
+          case 'superseded':
+
+            sf1.EventBus.trigger('post.supersedePostDialogRequest', postData);
+
+
+            break;
+          case 'pendingedits':
+            sf1.logger.info('Pending Edits Selected for Post Status')
+//
+//            sf1.EventBus.trigger('post.publishPostDialogRequest', postData);
 
 
             break;
@@ -443,6 +472,48 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
 
     });
 
+    /*
+     *
+     * Supersede Post Request
+     *
+     * */
+    sf1.EventBus.bind('post.supersedePostDialogRequest', function (post) {
+
+      // set the author
+      var author = sf1.currUserName();
+      if (sf1.hasStorage) {
+        if (localStorage.getItem('sf1UserPrefs')) {
+          var userPrefsObj = JSON.parse(localStorage.getItem('sf1UserPrefs'));
+          if (userPrefsObj) {
+            if (userPrefsObj.publishSettings) {
+              if (userPrefsObj.publishSettings.authorName) {
+                author = userPrefsObj.publishSettings.authorName;
+              }
+            }
+          }
+        }
+      }
+
+      post.author = author;
+      sf1.EventBus.trigger('ia.loadRegionContentRequest', {
+        region: 'modalRegion',
+        module: 'post',
+        view: 'SupersedePostDialog',
+        data: {data: post},
+        callback: function () {
+          sf1.EventBus.on('post.supersedePostSuccess', function () {
+            $.modal.close();
+            userId = sf1.currUserId();
+            sf1.EventBus.trigger('post.loadUserPosts', userId);
+          });
+        }
+
+      });
+
+    });
+
+
+
     sf1.EventBus.bind('post.publishPostBtnClicked', function (event) {
       // get the post data
 
@@ -472,6 +543,20 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
       postData.author = postAuthor;
       sf1.EventBus.trigger('post.publishPostRequest', postData);
     });
+
+    // Supersede Post Button Clicked
+    sf1.EventBus.bind('post.supersedePostBtnClicked', function (event) {
+      // get the post data
+
+      var postId = $(event.target).data('id');
+
+      var postData = {};
+      postData.id = postId;
+      sf1.EventBus.trigger('post.supersedePostRequest', postData);
+    });
+
+
+
     /*
      *
      * AJAX
@@ -480,7 +565,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      *
      *
      * */
-    sf1.EventBus.bind('post.publishPostRequest', function (postObj) {
+    sf1.EventBus.on('post.publishPostRequest', function (postObj) {
       sf1.io.ajax({
         type: 'PUT',
         url: '/publishpost/' + postObj.id,
@@ -496,6 +581,66 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
       });
     });
 
+    // Supersede Post Request
+    sf1.EventBus.on('post.supersedePostRequest', function (postObj) {
+      sf1.io.ajax({
+        type: 'PUT',
+        url: '/supersedepost/' + postObj.id,
+        data: postObj,
+        error: function (response) {
+          sf1.log('error superseding: ' + response);
+        },
+        success: function (response) {
+          sf1.log('SUCCESS SUPERSEDE');
+          //close modal window
+          sf1.EventBus.trigger('post.supersedePostSuccess');
+        }
+      });
+    });
+
+
+    // Generate Home Page Button Clicked
+    sf1.EventBus.on('post.generateHomePageBtnClicked', function () {
+      if (confirm('Generate HomePage?')) {
+        sf1.logger.info('GENERATE HOME PAGE BUTTON CLICKED');
+        sf1.io.ajax({
+          type: 'GET',
+          url: '/generate/homepage',
+          error: function (response) {
+            sf1.log('error publishing: ' + response);
+          },
+          success: function (response) {
+            sf1.log('SUCCESS PUBLISH home page');
+            //close modal window
+            sf1.EventBus.trigger('post.generateHomePageSuccess');
+          }
+        });
+
+
+      }
+    });
+
+    // Delete Post Request
+    sf1.EventBus.on('post.deletePostRequest', function (event) {
+      var postId = $(event.target).data('id');
+      if (postId) {
+        if (confirm('delete this post?')) {
+          sf1.io.ajax({
+            type: 'DELETE',
+            url: '/harddelete/' + postId,
+            success: function (resonse) {
+              sf1.logger.info('successful delete - reload the post list');
+              userId = sf1.currUserId();
+              sf1.EventBus.trigger('post.loadUserPosts', userId);
+            },
+            error: function (response) {
+              sf1.logger.error('Error deleting post: ' + response);
+            }
+          })
+        }
+      }
+    });
+
     return{
       IndexView: indexView,
       PostEditor: function () {
@@ -506,7 +651,8 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
       PostListView: View.PostListView,
       PostCollection: Model.PostCollection,
       RecentPostListView: View.RecentPostListView,
-      PublishPostDialog: publishPostDialog
+      PublishPostDialog: publishPostDialog,
+      SupersedePostDialog:supersedePostDialog
     };
   }
 );

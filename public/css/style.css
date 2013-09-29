@@ -1,0 +1,55 @@
+body{
+    font-size:16px;
+    color:#9da6db;
+}
+.article-title{
+    font-size:150%;
+    color:#1b224a;
+    letter-spacing:.09rem;
+}
+.page-header{
+    height:20rem;
+    border:0px solid red;
+    border-radius:1rem 1rem 0 0;
+    background: transparent url(images/baker.jpg) left center no-repeat;
+}
+.post-publish-date, .post-author{
+    font-weight:normal;
+    font-size:90%;
+}
+.post-publish-date span, .post-author span{
+    color:#a0a0a0;
+    font-size:100%;
+
+ }
+.main{
+   /* max-width:70rem;*/
+    margin:1rem auto 1rem auto;
+}
+.main-article{
+    border:0px solid blue;
+
+}
+.main-aside{
+    border:0px solid green;
+    font-size:85%;
+}
+.header-home-link{
+    display:inline-block;
+    margin:1rem;
+    text-shadow: 1px 1px 1px rgba(250, 250, 250, .7);
+}
+.first-level-container{
+    border-left:1px solid #eeeeee;
+    padding-left:1rem;
+    -webkit-box-shadow: 5px 5px 0px rgba(190, 190, 190, 0.75);
+    -moz-box-shadow:    5px 5px 0px rgba(190, 190, 190, 0.75);
+    box-shadow:         5px 5px 0px rgba(190, 190, 190, 0.75);
+}
+.post-body{
+    font-size:112%;
+    font-family:"GraublauSlab-Light", Helvetica, Arial, sans-serif;
+    letter-spacing:.05rem;
+    color:#3b49a0;
+
+}
