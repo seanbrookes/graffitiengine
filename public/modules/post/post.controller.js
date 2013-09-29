@@ -6,8 +6,8 @@
  * Time: 10:57 PM
  *
  */
-define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modules/post/post.templates.html', 'uirte'],
-  function (sf1, Model, View, template, RTE) {
+define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modules/post/post.templates.html', 'uirte', 'wysiwyg', 'wysiwygconfig'],
+  function (sf1, Model, View, template, RTE, wysiwyg, wysiwygconfig) {
     var anchorSelector = '#TemplateContainer';
 
     _.templateSettings.variable = 'S';
@@ -205,6 +205,10 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
       $('#PostTitle').val(post.title);
       $('#PostSlug').text(post.slug);
       $('#wysihtml5-textarea').val(post.body);
+      var editor = new wysiwyg.Editor("wysihtml5-textarea", { // id of textarea element
+        toolbar: "wysihtml5-toolbar", // id of toolbar element
+        parserRules: wysiwygconfig // defined in parser rules set
+      });
 //            CKEDITOR.instances.wysihtml5-textarea.setData(post.body);
       $('#PostStatus').val(post.status);
 

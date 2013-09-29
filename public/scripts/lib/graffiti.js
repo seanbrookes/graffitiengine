@@ -24,13 +24,13 @@ var Graffiti = (function(window, undefined){
 
   });
   function renderMainAside(){
-    $.getScript('widgets/bio/bio.widget.js',function(){
+    $.getScript('/scripts/widgets/bio/bio.widget.js',function(){
 //      var x = data;
 //      var p = biowidget().getMarkup();
 //      console.log('fuck yeah: ' + p);
       $('.main-aside').append(biowidget().getMarkup());
       var div = document.createElement("div");
-      div.innerHTML = "<li><a>holy fuck it works</a></li>";
+      div.innerHTML = "<li><a>it works</a></li>";
       var fragment = document.createDocumentFragment();
       while ( div.firstChild ) {
         fragment.appendChild( div.firstChild );
