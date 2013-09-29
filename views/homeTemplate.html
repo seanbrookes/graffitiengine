@@ -7,30 +7,49 @@
 
         <title>Home :. fourfivesix.ca</title>
 
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="/css/style.css">
     </head>
     <body class="home-page">
-        <div class="viewport">
-            <header class="page-header" data-region="pageHeaderRegion">
+        <div class="container">
+
+
+
+            <header class="page-header first-level-container" data-region="pageHeaderRegion">
 
                 <a class="header-home-link" href="/" title="fourfivesix home">
-                   home
+                    <h1 class="app-title">Four Five Six</h1>
                 </a>
-                <h1 class="app-title">Four Five Six</h1>
+
 
             </header>
 
+
+
             <nav class="main-nav" data-region="mainNavRegion"></nav>
 
-            <div class="main" role="main">
-                <div class="article-list-container" data-region="articleListRegion">
-                    <%= markup %>
+
+            <div class="main row" role="main">
+                <div class="col-md-9">
+                    <div class="article-list-container" data-region="articleListRegion">
+                        <%= markup %>
+                    </div>
                 </div>
-                <aside class="main-aside" data-region="asideDataRegion"></aside>
+                <div class="col-md-3">
+                    <aside class="main-aside  first-level-container" data-region="asideDataRegion"></aside>
+
+                </div>
             </div>
 
+
+
+
             <footer class="page-footer" data-region="pageFooterRegion"></footer>
+
+
+
         </div>
+
         <script data-appname="fourfivesix">
             (function(){
 
