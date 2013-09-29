@@ -22,6 +22,13 @@ define(['sf1', 'marionette', 'uirte'],
       }
     };
 
+    var RTEView = Backbone.Marionette.ItemView.extend({
+      template:'#RTETemplate',
+      onShow:function(){
+        sf1.EventBus.trigger('post.textAreaLoaded');
+      }
+    });
+
     var indexView = Backbone.Marionette.CompositeView.extend({
         template: '#PostIndexTemplate',
         regions: {
@@ -188,7 +195,8 @@ define(['sf1', 'marionette', 'uirte'],
       RecentPostListView: recentPostListView,
       PublishPostDialog: publishPostDialog,
       PostControlsView:postControlsView,
-      SupersedePostDialog:supersedePostDialog
+      SupersedePostDialog:supersedePostDialog,
+      RTEView:RTEView
 
     };
 

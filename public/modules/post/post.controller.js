@@ -17,6 +17,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
 
     var editorMode = 'new';
     var userId;
+    var editor;
 
     /*
      *
@@ -43,10 +44,11 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
           el: '[data-region="composerRegion"]'
         });
         composerRegion.show(new View.PostEditorLayout());
-        editorRegion.show(new RTE.RTE());
-        $('#wysihtml5-textarea').on('keyup', function (event) {
-          sf1.EventBus.trigger('post.previewPostRequest');
-        });
+        editorRegion.show(new View.RTEView());
+
+//        $('#wysihtml5-textarea').on('keyup', function (event) {
+//          sf1.EventBus.trigger('post.previewPostRequest');
+//        });
         // check if slug passed in
         if (slug) {
           sf1.EventBus.trigger('post.loadEditPostBySlug', slug);
@@ -209,11 +211,8 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
       sf1.logger.info('||||    ATTEMPT TO ASSIGN THE VALUE HERE');
       sf1.logger.info('||||');
       sf1.logger.info('||||');
-      var editor = new wysiwyg.Editor("wysihtml5-textarea", { // id of textarea element
-        toolbar: "wysihtml5-toolbar", // id of toolbar element
-        parserRules: wysiwygconfig // defined in parser rules set
-      });
-      editor.setValue(post.body)
+
+      editor.setValue(post.body);
       //$('#wysihtml5-textarea').val(post.body);
 
 //            CKEDITOR.instances.wysihtml5-textarea.setData(post.body);
@@ -647,9 +646,19 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
             error: function (response) {
               sf1.logger.error('Error deleting post: ' + response);
             }
-          })
+          });
         }
       }
+    });
+
+    // Text Area Loaded
+    sf1.EventBus.on('post.textAreaLoaded',function(){
+      editor = new wysiwyg.Editor("wysihtml5-textarea", { // id of textarea element
+        toolbar: "wysihtml5-toolbar", // id of toolbar element
+        parserRules: wysiwygconfig // defined in parser rules set
+      });
+      sf1.logger.info('TEXT AREA LOADED EVENT LISTENER FIRED');
+
     });
 
     return{
