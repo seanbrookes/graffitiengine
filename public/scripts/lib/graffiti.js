@@ -30,7 +30,7 @@ var Graffiti = (function(window, undefined){
 //      console.log('fuck yeah: ' + p);
       $('.main-aside').append(biowidget().getMarkup());
       var div = document.createElement("div");
-      div.innerHTML = "<li><a>it works</a></li>";
+      div.innerHTML = "<li><a>follow me on twtter:</a></li>";
       var fragment = document.createDocumentFragment();
       while ( div.firstChild ) {
         fragment.appendChild( div.firstChild );
