@@ -213,7 +213,8 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
         toolbar: "wysihtml5-toolbar", // id of toolbar element
         parserRules: wysiwygconfig // defined in parser rules set
       });
-      $('#wysihtml5-textarea').val(post.body);
+      editor.setValue(post.body)
+      //$('#wysihtml5-textarea').val(post.body);
 
 //            CKEDITOR.instances.wysihtml5-textarea.setData(post.body);
       $('#PostStatus').val(post.status);
