@@ -51,13 +51,19 @@
         </div>
 
         <script data-appname="fourfivesix">
-            (function(){
+            (function () {
 
                 var script = document.createElement('script');
+                script.src = '/scripts/lib/graffiti.js';
                 script.async = true;
-                script.src = '/scripts/graffiti.js';
 
                 var entry = document.getElementsByTagName('script')[0];
+                entry.parentNode.insertBefore(script, entry);
+
+                script = document.createElement('script');
+                script.src = '/scripts/lib/jquery-1.8.2.min.js';
+
+                entry = document.getElementsByTagName('script')[0];
                 entry.parentNode.insertBefore(script, entry);
 
 
