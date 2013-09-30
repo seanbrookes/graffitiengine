@@ -29,14 +29,14 @@ var Graffiti = (function(window, undefined){
 //      var p = biowidget().getMarkup();
 //      console.log('fuck yeah: ' + p);
       $('.main-aside').append(biowidget().getMarkup());
-      var div = document.createElement("div");
-      div.innerHTML = "<p>follow me on twtter:</p>";
-      var fragment = document.createDocumentFragment();
-      while ( div.firstChild ) {
-        fragment.appendChild( div.firstChild );
-      }
-      $('.main-aside').append(fragment);
-      renderTwitterFollowButton();
+//      var div = document.createElement("div");
+//      div.innerHTML = "<p>follow me on twtter:</p>";
+//      var fragment = document.createDocumentFragment();
+//      while ( div.firstChild ) {
+//        fragment.appendChild( div.firstChild );
+//      }
+//      $('.main-aside').append(fragment);
+     // renderTwitterFollowButton();
 
 
     });

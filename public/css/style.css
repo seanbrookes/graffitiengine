@@ -8,7 +8,8 @@ body{
     letter-spacing:.09rem;
 }
 .page-header{
-    height:20rem;
+    height:16rem;
+    margin: 10px 0 10px;
     border:0px solid red;
     border-radius:1rem 1rem 0 0;
     background: transparent url(images/baker.jpg) left center no-repeat;
@@ -31,6 +32,7 @@ body{
 
 }
 .main-aside{
+    padding-top:2rem;
     border:0px solid green;
     font-size:85%;
 }
@@ -52,4 +54,16 @@ body{
     letter-spacing:.05rem;
     color:#3b49a0;
 
+}
+.avatar-frame{
+    display:inline-block;
+    padding:.67rem;
+    border-top:1px double #cccccc;
+    border-right:2px double #aaaaaa;
+    border-bottom:2px double #aaaaaa;
+    border-left:1px double #cccccc;
+    border-radius:1rem;
+}
+.avatar-image{
+    border-radius:.6rem;
 }
