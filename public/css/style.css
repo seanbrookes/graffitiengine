@@ -41,6 +41,11 @@ body{
     margin:1rem;
     text-shadow: 1px 1px 1px rgba(250, 250, 250, .7);
 }
+.app-title{
+    font-family: "Palatino Linotype";
+    letter-spacing:.7rem;
+    font-size:180%;
+}
 .first-level-container{
     border-left:1px solid #eeeeee;
     padding-left:1rem;
