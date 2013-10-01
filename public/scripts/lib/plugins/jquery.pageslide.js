@@ -8,7 +8,7 @@
  * Copyright (c) 2011 Scott Robbin (srobbin.com)
  * Dual licensed under the MIT and GPL licenses.
 */
-define(['jquery'],function(jQuery){
+define(['jquery','sf1'],function(jQuery,sf1){
   ;(function($){
     // Convenience vars for accessing elements
     var $body = $('body'),
@@ -32,6 +32,7 @@ define(['jquery'],function(jQuery){
       if ( url.indexOf("#") === 0 ) {
         // Load a page element
         $(url).clone(true).appendTo( $pageslide.empty() ).show();
+
       } else {
         // Load a URL. Into an iframe?
         if( useIframe ) {
@@ -53,6 +54,7 @@ define(['jquery'],function(jQuery){
         $pageslide.data( 'localEl', false );
 
       }
+      sf1.EventBus.trigger('slider.contentLoaded');
     }
 
     // Function that controls opening of the pageslide

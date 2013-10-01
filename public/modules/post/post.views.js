@@ -73,7 +73,10 @@ define(['sf1', 'marionette', 'uirte','dataTable','pageslide'],
         if (!sf1.isUserAuth()) {
           $('.form-controls-container').hide();
         }
-        $('a.lnk-show-posts').pageslide();
+        $('a.lnk-show-posts').pageslide({iframe:false});
+        sf1.EventBus.on('slider.contentLoaded',function(){
+          $('.post-list-panel').dataTable();
+        });
       }
     });
 
@@ -115,7 +118,7 @@ define(['sf1', 'marionette', 'uirte','dataTable','pageslide'],
         }
       },
       onShow:function(){
-        $('#EditPostListTable').dataTable();
+        $('.post-list-panel').dataTable();
       }
     });
     // Publish Post Dialog
