@@ -6,7 +6,7 @@
  * Time: 10:58 PM
  *
  */
-define(['sf1', 'marionette', 'uirte'],
+define(['sf1', 'marionette', 'uirte','dataTable','pageslide'],
   function (sf1, Marionette) {
 
     var viewHelpers = {
@@ -73,6 +73,7 @@ define(['sf1', 'marionette', 'uirte'],
         if (!sf1.isUserAuth()) {
           $('.form-controls-container').hide();
         }
+        $('a.lnk-show-posts').pageslide();
       }
     });
 
@@ -101,6 +102,7 @@ define(['sf1', 'marionette', 'uirte'],
       template: '#PostListTemplate',
       itemView: postListItemView,
       itemViewContainer: 'tbody',
+      id:'PostPanel',
       events: {
         'click .post-status': function (event) {
           sf1.EventBus.trigger('post.changePostStatusClicked', event);
@@ -111,6 +113,9 @@ define(['sf1', 'marionette', 'uirte'],
         'click [data-cmd="delete"]':function(event){
           sf1.EventBus.trigger('post.deletePostRequest', event);
         }
+      },
+      onShow:function(){
+        $('#EditPostListTable').dataTable();
       }
     });
     // Publish Post Dialog

@@ -1,2 +1,141 @@
 {"level":"info","message":"createUser request","timestamp":"2013-09-08T15:12:57.501Z"}
 {"level":"info","message":"createUser request","timestamp":"2013-09-08T15:17:54.644Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-14T05:41:03.813Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"\"}","timestamp":"2013-09-14T05:41:03.814Z"}
+{"level":"warn","message":"login attempt missing username or password","timestamp":"2013-09-14T05:41:03.815Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-14T06:32:14.917Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-14T06:32:14.918Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-14T15:02:35.868Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-14T15:02:35.869Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-14T16:18:38.291Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-14T16:18:38.292Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T06:47:35.635Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T06:47:35.636Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T06:56:50.288Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T06:56:50.290Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T07:18:56.508Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T07:18:56.510Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T07:23:56.211Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachari.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T07:23:56.212Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T07:29:33.647Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T07:29:33.650Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T07:37:25.771Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T07:37:25.773Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T08:01:29.759Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T08:01:29.760Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T08:04:16.473Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T08:04:16.474Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T08:06:42.835Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T08:06:42.838Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T08:22:26.755Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T08:22:26.756Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T08:25:46.918Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T08:25:46.919Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T08:31:52.658Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T08:31:52.658Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T08:35:00.470Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T08:35:00.470Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T08:37:03.655Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T08:37:03.659Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T08:39:26.335Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T08:39:26.339Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T15:18:00.899Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T15:18:00.902Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T15:26:07.295Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T15:26:07.295Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T15:33:54.892Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T15:33:54.917Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T15:37:48.371Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T15:37:48.375Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T15:54:38.684Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T15:54:38.684Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T15:56:24.265Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T15:56:24.265Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T16:04:37.475Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T16:04:37.479Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T16:15:57.961Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T16:15:57.962Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-15T16:23:20.608Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-15T16:23:20.609Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-20T04:50:28.433Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-20T04:50:28.434Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-22T02:32:10.758Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@elasticpath.com\",\"password\":\"password\"}","timestamp":"2013-09-22T02:32:10.760Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-23T00:46:53.368Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-23T00:46:53.369Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-23T00:49:18.404Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-23T00:49:18.405Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-23T00:54:52.191Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-23T00:54:52.191Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-23T02:47:38.313Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-23T02:47:38.316Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-23T02:50:50.175Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-23T02:50:50.180Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-23T02:52:14.995Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-23T02:52:14.999Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-23T02:53:12.232Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-23T02:53:12.234Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-24T02:49:35.120Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-24T02:49:35.120Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-24T02:52:25.547Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-24T02:52:25.548Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-25T02:46:40.441Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-25T02:46:40.442Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-25T02:53:41.501Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-25T02:53:41.505Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T17:49:02.532Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T17:49:02.533Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T18:49:15.135Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T18:49:15.137Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T22:59:57.929Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T22:59:57.930Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T23:03:04.362Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T23:03:04.364Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T23:04:56.365Z"}
+{"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"password\"}","timestamp":"2013-09-28T23:04:56.366Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T23:07:25.207Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T23:07:25.208Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T23:09:33.499Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T23:09:33.500Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T23:13:29.618Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T23:13:29.619Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T23:15:19.286Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T23:15:19.287Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T23:18:41.224Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T23:18:41.226Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T23:33:00.080Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T23:33:00.081Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T23:36:04.255Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T23:36:04.257Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T23:55:04.211Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T23:55:04.212Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T23:57:25.567Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T23:57:25.568Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-28T23:59:13.958Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-28T23:59:13.959Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-29T01:04:12.481Z"}
+{"level":"info","message":"{\"email\":\"jak@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-29T01:04:12.482Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-29T01:37:10.467Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-29T01:37:10.467Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-29T01:39:32.698Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-29T01:39:32.699Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-29T01:43:14.643Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-29T01:43:14.644Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-29T01:47:44.050Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-29T01:47:44.051Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-29T01:52:00.362Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-29T01:52:00.363Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-29T02:02:09.968Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-29T02:02:09.969Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-29T02:04:48.115Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-29T02:04:48.116Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-29T02:07:52.163Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-29T02:07:52.164Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-29T02:09:41.696Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-29T02:09:41.698Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-29T06:04:20.643Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-29T06:04:20.644Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-29T08:17:06.486Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-29T08:17:06.486Z"}
+{"level":"info","message":"login attempt","timestamp":"2013-09-29T14:38:52.033Z"}
+{"level":"info","message":"{\"email\":\"jack@jack.com\",\"password\":\"password\"}","timestamp":"2013-09-29T14:38:52.034Z"}

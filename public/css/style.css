@@ -6,6 +6,7 @@ body{
     font-size:150%;
     color:#1b224a;
     letter-spacing:.09rem;
+
 }
 .page-header{
     height:16rem;
@@ -36,6 +37,9 @@ body{
     border:0px solid green;
     font-size:85%;
 }
+.header-home-link:hover{
+    text-decoration: none;
+}
 .header-home-link{
     display:inline-block;
     margin:1rem;
@@ -44,7 +48,8 @@ body{
 .app-title{
     font-family: "Palatino Linotype";
     letter-spacing:.7rem;
-    font-size:180%;
+    font-size:161%;
+    word-spacing:1rem;
 }
 .first-level-container{
     border-left:1px solid #eeeeee;

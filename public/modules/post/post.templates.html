@@ -14,7 +14,7 @@
         <h1>Post Editor</h1>
         <button class="btn-close-preview btn-post-control">close preview</button>
         <div class="post-preview post-body"></div>
-
+<a href="#PostPanel" class="lnk-show-posts">POSTS</a>
         <form id="PostForm">
             <div class="form-controls-container" class="row">
                 <button class="btn-round btn-save btn-post-control btn-save-post">Save</button>
@@ -112,7 +112,7 @@
     <!-- Post List -->
     <script id="PostListTemplate" type="text/template">
         <h2><%= S.collectionTitle %></h2>
-        <table>
+        <table id="EditPostListTable">
             <thead>
             <tr>
                 <th>title</th>
