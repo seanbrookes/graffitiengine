@@ -249,19 +249,18 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * */
     sf1.EventBus.bind('post.savePostButtonClicked', function (event) {
       sf1.logger.info('save post button click event');
-      sf1.logger.info('Post Contents: ' + $('#wysihtml5-textarea').val());
+//      sf1.logger.info('Post Contents: ' + $('#wysihtml5-textarea').val());
       if (userId) {
         sf1.logger.info('Save post we have userId');
-        sf1.logger.info('| 1');
         var postObj = {};
         postObj.userId = userId;
         postObj.title = $('#PostTitle').val();
-        sf1.logger.info('| 2');
+        if (!editorMode){
+          editorMode = 'new';
+        }
 
         if ('new' === editorMode) {
-          sf1.logger.info('| 3');
           postObj.body = '<div class="post-body">' + $('#wysihtml5-textarea').val() + '</div>';
-          sf1.logger.info('| 4');
           postObj.status = 'draft';
           // save new post
           sf1.io.ajax({
@@ -306,7 +305,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
         }
       }
       else {
-        sf1.logger.warn('warn - no user id');
+        sf1.logger.warn('warn - save post: no user id');
       }
 
     });
