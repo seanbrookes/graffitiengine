@@ -19,6 +19,7 @@ require.config({
     'prettydate'    : 'scripts/lib/plugins/jquery.prettydate',
     'contextmenu'   : 'scripts/lib/plugins/jquery.contextmenu',
     'dataTable'     : 'scripts/lib/plugins/jquery.dataTables.min',
+    'toast'         : 'scripts/lib/plugins/jquery.toastmessage',
     'pageslide'     : 'scripts/lib/plugins/jquery.pageslide',
     'underscore'    : 'scripts/lib/underscore',
     'json2'         : 'scripts/lib/json2',

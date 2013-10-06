@@ -6,8 +6,8 @@
  * Time: 10:57 PM
  *
  */
-define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modules/post/post.templates.html', 'uirte', 'wysiwyg', 'wysiwygconfig'],
-  function (sf1, Model, View, template, RTE, wysiwyg, wysiwygconfig) {
+define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modules/post/post.templates.html', 'uirte', 'wysiwyg', 'wysiwygconfig','toast'],
+  function (sf1, Model, View, template, RTE, wysiwyg, wysiwygconfig, toast) {
     var anchorSelector = '#TemplateContainer';
 
     _.templateSettings.variable = 'S';
@@ -95,6 +95,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
         data: postObj,
         success: function (response) {
           sf1.log('success saving post: ' + response);
+          $().toastmessage('showSuccessToast', "post created f");
           sf1.EventBus.trigger('post.createNewPostSuccess');
         },
         error: function (response) {
@@ -250,12 +251,17 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
       sf1.logger.info('save post button click event');
       sf1.logger.info('Post Contents: ' + $('#wysihtml5-textarea').val());
       if (userId) {
+        sf1.logger.info('Save post we have userId');
+        sf1.logger.info('| 1');
         var postObj = {};
         postObj.userId = userId;
         postObj.title = $('#PostTitle').val();
+        sf1.logger.info('| 2');
 
         if ('new' === editorMode) {
+          sf1.logger.info('| 3');
           postObj.body = '<div class="post-body">' + $('#wysihtml5-textarea').val() + '</div>';
+          sf1.logger.info('| 4');
           postObj.status = 'draft';
           // save new post
           sf1.io.ajax({
@@ -263,9 +269,12 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
             url: '/posts',
             data: postObj,
             success: function (response) {
+              sf1.logger.info('| 5');
               sf1.logger.info('success saving post: ' + response);
+              $().toastmessage('showSuccessToast', "post created");
             },
             error: function (response) {
+              sf1.logger.info('| 6');
               sf1.logger.error('error saving post: ' + response);
             }
           });
@@ -286,6 +295,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
               data: postObj,
               success: function (response) {
                 sf1.logger.info('success saving post: ' + response);
+                $().toastmessage('showSuccessToast', "post updated");
               },
               error: function (response) {
                 sf1.logger.error('error saving post: ' + response);
@@ -315,7 +325,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      *
      * */
     sf1.EventBus.bind('post.previewPostRequest', function () {
-      sf1.logger.info('Post Contents: ' + $('#wysihtml5-textarea').val());
+      sf1.logger.info('Post Contents - preview: ' + $('#wysihtml5-textarea').val());
       var postData = $('#wysihtml5-textarea').val();
       if (postData) {
         $('.btn-close-preview').show();
@@ -329,7 +339,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * */
     sf1.EventBus.bind('post.resetPostButtonClicked', function (event) {
       sf1.logger.info('Reset post button click event');
-      sf1.logger.info('Post Contents: ' + $('#wysihtml5-textarea').val());
+      sf1.logger.info('Post Contents - reset: ' + $('#wysihtml5-textarea').val());
     });
     /*
      *
@@ -338,7 +348,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * */
     sf1.EventBus.bind('post.closePostPreviewButtonClicked', function (event) {
       sf1.logger.info('close preview post button click event');
-      sf1.logger.info('Post Contents: ' + $('#wysihtml5-textarea').val());
+      sf1.logger.info('Post Contents post preview button clicked: ' + $('#wysihtml5-textarea').val());
       $('.btn-close-preview').hide();
       $('.post-preview').empty();
     });

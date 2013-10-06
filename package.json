@@ -26,7 +26,7 @@
     "grunt-contrib-less": "~0.7.0",
     "grunt-contrib-watch": "~0.5.3"
   },
-  "description": "Simple Framework One is an application bootstrap project based a modular JavaScript patterns:",
+  "description": "FourFiveSix is a blog implementation",
   "main": "app.js",
   "directories": {
     "test": "tests"
