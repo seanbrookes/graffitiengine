@@ -25,6 +25,11 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      *
      * */
     var indexView = function (slug) {
+      editorMode = 'new';
+      if (slug){
+        editorMode = 'update';
+      }
+
       var targetLayoutView = new View.IndexLayout();
 
       var indexView = new View.IndexView();
@@ -268,9 +273,11 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
             url: '/posts',
             data: postObj,
             success: function (response) {
-              sf1.logger.info('| 5');
-              sf1.logger.info('success saving post: ' + response);
               $().toastmessage('showSuccessToast', "post created");
+              sf1.logger.info('success saving post: ' + response);
+              var slug = response.slug;
+              document.location.href = '#post/edit/' + slug;
+
             },
             error: function (response) {
               sf1.logger.info('| 6');
@@ -314,7 +321,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * Preview Button
      *
      * */
-    sf1.EventBus.bind('post.previewPostButtonClicked', function (event) {
+    sf1.EventBus.on('post.previewPostButtonClicked', function (event) {
       sf1.logger.info('Preview post button click event');
       sf1.EventBus.trigger('post.previewPostRequest');
     });
@@ -323,7 +330,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * Preview Request
      *
      * */
-    sf1.EventBus.bind('post.previewPostRequest', function () {
+    sf1.EventBus.on('post.previewPostRequest', function () {
       sf1.logger.info('Post Contents - preview: ' + $('#wysihtml5-textarea').val());
       var postData = $('#wysihtml5-textarea').val();
       if (postData) {

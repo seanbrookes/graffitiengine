@@ -231,3 +231,7 @@
 {"level":"info","message":"getUserPosts 2: ","timestamp":"2013-09-29T08:17:10.839Z"}
 {"level":"info","message":"getUserPosts 1: userId: 522c952266eeae5186000001","timestamp":"2013-09-29T14:38:55.013Z"}
 {"level":"info","message":"getUserPosts 2: ","timestamp":"2013-09-29T14:38:55.014Z"}
+{"level":"info","message":"getUserPosts 1: userId: 522c952266eeae5186000001","timestamp":"2013-10-06T08:28:40.459Z"}
+{"level":"info","message":"getUserPosts 2: ","timestamp":"2013-10-06T08:28:40.460Z"}
+{"level":"info","message":"getUserPosts 1: userId: 5233f7a63c541dc79b000001","timestamp":"2013-10-06T15:53:24.124Z"}
+{"level":"info","message":"getUserPosts 2: ","timestamp":"2013-10-06T15:53:24.124Z"}
