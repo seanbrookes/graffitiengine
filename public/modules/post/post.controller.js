@@ -147,6 +147,9 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
       }
       if (sf1.hasStorage){
         var userPrefs = JSON.parse(localStorage.getItem('sf1UserPrefs'));
+        if (!userPrefs.autoSaveSettings){
+          userPrefs.autoSaveSettings = {};
+        }
         userPrefs.autoSaveSettings.enabled = val;
         localStorage.setItem('sf1UserPrefs',JSON.stringify(userPrefs));
       }
@@ -167,6 +170,9 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
       }
       if (sf1.hasStorage){
         var userPrefs = JSON.parse(localStorage.getItem('sf1UserPrefs'));
+        if (!userPrefs.autoSaveSettings){
+          userPrefs.autoSaveSettings = {};
+        }
         userPrefs.autoSaveSettings.interval = interval;
         localStorage.setItem('sf1UserPrefs',JSON.stringify(userPrefs));
       }
