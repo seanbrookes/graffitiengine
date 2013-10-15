@@ -22,6 +22,12 @@ define(['sf1', 'marionette', 'uirte','dataTable','pageslide'],
       }
     };
 
+    // function check if auto save enabled
+    function isAutoSaveEnabled(){
+      return $();
+    }
+
+
     var RTEView = Backbone.Marionette.ItemView.extend({
       template:'#RTETemplate',
       onShow:function(){
@@ -65,6 +71,23 @@ define(['sf1', 'marionette', 'uirte','dataTable','pageslide'],
         'click .btn-reset-post': function (event) {
           event.preventDefault();
           sf1.EventBus.trigger('post.resetPostButtonClicked', event);
+
+        },
+        'click #AutoSaveCheckbox':function(event){
+          var eventObj = {
+            autoSaveEnabled:$('#AutoSaveCheckbox').is(':checked'),
+            autoSaveInterval:$('#AutoSaveInterval').val()
+          };
+          sf1.EventBus.trigger('post.autoSavePreferenceUpdate',eventObj);
+
+
+        },
+        'blur #AutoSaveInterval':function(event){
+          var eventObj = {
+            autoSaveEnabled:$('#AutoSaveCheckbox').is(':checked'),
+            autoSaveInterval:$('#AutoSaveInterval').val()
+          };
+          sf1.EventBus.trigger('post.autoSavePreferenceUpdate',eventObj);
 
         }
 
@@ -193,6 +216,28 @@ define(['sf1', 'marionette', 'uirte','dataTable','pageslide'],
         }
       }
     });
+
+    /*
+    *
+    * Functions
+    *
+    * */
+    function initAutoSave(options){
+      var settings = {enabled:true,interval:5};
+      if (options){
+        settings = options;
+      }
+      if (settings.enabled){
+        $('#AutoSaveCheckbox').prop('checked', true);
+      }
+      $('#AutoSaveInterval').val(settings.interval);
+    }
+    // Init Autosave Interval
+    function initAutosaveInterval(val){
+      $('#AutoSaveInterval').val(val);
+    }
+
+
     return {
       IndexView: indexView,
       IndexLayout: indexDefaultLayout,
@@ -204,7 +249,9 @@ define(['sf1', 'marionette', 'uirte','dataTable','pageslide'],
       PublishPostDialog: publishPostDialog,
       PostControlsView:postControlsView,
       SupersedePostDialog:supersedePostDialog,
-      RTEView:RTEView
+      RTEView:RTEView,
+      initAutoSave:initAutoSave,
+      initAutosaveInterval:initAutosaveInterval
 
     };
 

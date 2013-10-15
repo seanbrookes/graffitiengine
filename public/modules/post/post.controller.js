@@ -18,6 +18,8 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
     var editorMode = 'new';
     var userId;
     var editor;
+    var intervalPlaceholder;
+    var defaultAutosaveInterval = 5;
 
     /*
      *
@@ -28,6 +30,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
       editorMode = 'new';
       if (slug){
         editorMode = 'update';
+        
       }
 
       var targetLayoutView = new View.IndexLayout();
@@ -91,6 +94,102 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      *
      * */
 
+
+    // Autosave Timer
+    function autoSaveTimer(){
+      clearInterval(intervalPlaceholder);
+      intervalPlaceholder = setInterval(function(){
+        if (isAutoSaveOn()){
+          sf1.EventBus.trigger('post.submitPostRequest');
+        }
+        else{
+          clearInterval(intervalPlaceholder);
+        }
+      },(getAutosaveInterval() * 60000));
+    }
+
+    // Check if Auto Save is on
+    function isAutoSaveOn(){
+      var returnVar;
+      if (sf1.hasStorage) {
+        if (localStorage.getItem('sf1UserPrefs')) {
+          var userPrefsObj = JSON.parse(localStorage.getItem('sf1UserPrefs'));
+          if (userPrefsObj) {
+            if (userPrefsObj.autoSaveSettings){
+              returnVar = userPrefsObj.autoSaveSettings.enabled;
+            }
+            else{
+              setAutosaveEnabled(true);
+              returnVar = true;
+            }
+          }
+          else{
+            setAutosaveEnabled(true);
+            returnVar = true;
+          }
+        }
+        else{
+          setAutosaveEnabled(true);
+          returnVar = true;
+        }
+      }
+      else{
+        setAutosaveEnabled(true);
+        returnVar = true;
+      }
+      return returnVar;
+    }
+    // Set AutoSave On
+    function setAutosaveEnabled(val){
+      var setting = true;
+      if (val){
+        setting = val;
+      }
+      if (sf1.hasStorage){
+        var userPrefs = JSON.parse(localStorage.getItem('sf1UserPrefs'));
+        userPrefs.autoSaveSettings.enabled = val;
+        localStorage.setItem('sf1UserPrefs',JSON.stringify(userPrefs));
+      }
+    }
+    // Set AutoSave Interval
+    function setAutoSaveInterval(val){
+      var interval = defaultAutosaveInterval;
+      if (val){
+        try{
+          var targetVal = parseInt(val);
+          if (targetVal > 0){
+            interval = val;
+          }
+        }
+        catch(e){
+
+        }
+      }
+      if (sf1.hasStorage){
+        var userPrefs = JSON.parse(localStorage.getItem('sf1UserPrefs'));
+        userPrefs.autoSaveSettings.interval = interval;
+        localStorage.setItem('sf1UserPrefs',JSON.stringify(userPrefs));
+      }
+    }
+
+
+    // Get Autosave Interval
+    function getAutosaveInterval(){
+      var returnVar = 5;
+      if (sf1.hasStorage) {
+        if (localStorage.getItem('sf1UserPrefs')) {
+          var userPrefsObj = JSON.parse(localStorage.getItem('sf1UserPrefs'));
+          if (userPrefsObj) {
+            if (userPrefsObj.autoSaveSettings){
+              returnVar = userPrefsObj.autoSaveSettings.interval;
+            }
+          }
+        }
+      }
+      return parseInt(returnVar);
+    }
+
+    // Create New Post
     function createNewPost(postObj) {
       postObj.status = 'draft';
       // save new post
@@ -155,7 +254,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * Load Edit Post by Slug
      *
      * */
-    sf1.EventBus.bind('post.loadEditPostBySlug', function (slug) {
+    sf1.EventBus.on('post.loadEditPostBySlug', function (slug) {
       if (slug) {
         sf1.io.ajax({
           type: 'GET',
@@ -176,7 +275,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * Load User Post List
      *
      * */
-    sf1.EventBus.bind('post.loadUserPosts', function (userId) {
+    sf1.EventBus.on('post.loadUserPosts', function (userId) {
       if (userId) {
         var postCollection = new Model.PostCollection();
         // var postsUrl = '/recentposts';
@@ -207,22 +306,53 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * Initialize Edit Post Form
      *
      * */
-    sf1.EventBus.bind('post.initializeEditForm', function (post) {
+    sf1.EventBus.on('post.initializeEditForm', function (post) {
+      // check user prefs for autosave
+      // if not found - set to on and set default value
       editorMode = 'update';
       $('#PostId').val(post._id);
       $('#PostTitle').val(post.title);
       $('#PostSlug').val(post.slug);
-      sf1.logger.info('||||');
-      sf1.logger.info('||||');
-      sf1.logger.info('||||    ATTEMPT TO ASSIGN THE VALUE HERE');
-      sf1.logger.info('||||');
-      sf1.logger.info('||||');
+
 
       editor.setValue(post.body);
-      //$('#wysihtml5-textarea').val(post.body);
 
-//            CKEDITOR.instances.wysihtml5-textarea.setData(post.body);
       $('#PostStatus').val(post.status);
+
+
+        var autoSaveEnabled = true;
+        var autoSaveInterval = 10;
+
+      //      sf1.logger.info('AUTO SAVE UPDATE: ');
+      if (sf1.hasStorage) {
+        if (localStorage.getItem('sf1UserPrefs')) {
+          var userPrefsObj = JSON.parse(localStorage.getItem('sf1UserPrefs'));
+          if (userPrefsObj) {
+            if (userPrefsObj.autoSaveSettings){
+              autoSaveEnabled = userPrefsObj.autoSaveSettings.enabled || true;
+              autoSaveInterval = userPrefsObj.autoSaveSettings.interval;
+            }
+          }
+        }
+      }
+      if (isAutoSaveOn()){
+        var userPrefs = JSON.parse(localStorage.getItem('sf1UserPrefs'));
+
+        View.initAutoSave(userPrefs.autoSaveSettings);
+        autoSaveTimer();
+//        intervalPlaceholder = setInterval(function(){
+//          if (isAutoSaveOn()){
+//            sf1.EventBus.trigger('post.submitPostRequest');
+//          }
+//          else{
+//            clearInterval(intervalPlaceholder);
+//          }
+//        },(autoSaveInterval * 3000));
+      }
+      else{
+        View.initAutoSave({enabled:false,interval:0});
+        clearInterval(intervalPlaceholder);
+      }
 
     });
     /*
@@ -231,7 +361,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      *
      *
      * */
-    sf1.EventBus.bind('post.loadEditPost', function (postId) {
+    sf1.EventBus.on('post.loadEditPost', function (postId) {
       if (postId) {
         sf1.io.ajax({
           type: 'GET',
@@ -252,70 +382,76 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * Save Button
      *
      * */
-    sf1.EventBus.bind('post.savePostButtonClicked', function (event) {
+    sf1.EventBus.on('post.savePostButtonClicked', function (event) {
       sf1.logger.info('save post button click event');
 //      sf1.logger.info('Post Contents: ' + $('#wysihtml5-textarea').val());
       if (userId) {
         sf1.logger.info('Save post we have userId');
-        var postObj = {};
-        postObj.userId = userId;
-        postObj.title = $('#PostTitle').val();
-        if (!editorMode){
-          editorMode = 'new';
-        }
-
-        if ('new' === editorMode) {
-          postObj.body = '<div class="post-body">' + $('#wysihtml5-textarea').val() + '</div>';
-          postObj.status = 'draft';
-          // save new post
-          sf1.io.ajax({
-            type: 'POST',
-            url: '/posts',
-            data: postObj,
-            success: function (response) {
-              $().toastmessage('showSuccessToast', "post created");
-              sf1.logger.info('success saving post: ' + response);
-              var slug = response.slug;
-              document.location.href = '#post/edit/' + slug;
-
-            },
-            error: function (response) {
-              sf1.logger.info('| 6');
-              sf1.logger.error('error saving post: ' + response);
-            }
-          });
-
-        }
-        if ('update' === editorMode) {
-          postObj.body = $('#wysihtml5-textarea').val();
-          var postId = $('#PostId').val();
-
-
-          if (postId) {
-            postObj.id = postId;
-            postObj.status = $('#PostStatus').val();
-            // update post
-            sf1.io.ajax({
-              type: 'PUT',
-              url: '/posts/' + postObj.id,
-              data: postObj,
-              success: function (response) {
-                sf1.logger.info('success saving post: ' + response);
-                $().toastmessage('showSuccessToast', "post updated");
-              },
-              error: function (response) {
-                sf1.logger.error('error saving post: ' + response);
-              }
-            });
-          }
-
-        }
+        sf1.EventBus.trigger('post.submitPostRequest');
       }
       else {
         sf1.logger.warn('warn - save post: no user id');
       }
 
     });
+
+    // Submit Post
+    sf1.EventBus.on('post.submitPostRequest', function () {
+      var postObj = {};
+      postObj.userId = userId;
+      postObj.title = $('#PostTitle').val();
+      if (!editorMode){
+        editorMode = 'new';
+      }
+
+      if ('new' === editorMode) {
+        postObj.body = '<div class="post-body">' + $('#wysihtml5-textarea').val() + '</div>';
+        postObj.status = 'draft';
+        // save new post
+        sf1.io.ajax({
+          type: 'POST',
+          url: '/posts',
+          data: postObj,
+          success: function (response) {
+            $().toastmessage('showSuccessToast', "post created");
+            sf1.logger.info('success saving post: ' + response);
+            var slug = response.slug;
+            document.location.href = '#post/edit/' + slug;
+
+          },
+          error: function (response) {
+            sf1.logger.info('| 6');
+            sf1.logger.error('error saving post: ' + response);
+          }
+        });
+
+      }
+      if ('update' === editorMode) {
+        postObj.body = $('#wysihtml5-textarea').val();
+        var postId = $('#PostId').val();
+
+
+        if (postId) {
+          postObj.id = postId;
+          postObj.status = $('#PostStatus').val();
+          // update post
+          sf1.io.ajax({
+            type: 'PUT',
+            url: '/posts/' + postObj.id,
+            data: postObj,
+            success: function (response) {
+              sf1.logger.info('success saving post: ' + response);
+              $().toastmessage('showSuccessToast', "post updated");
+            },
+            error: function (response) {
+              sf1.logger.error('error saving post: ' + response);
+            }
+          });
+        }
+
+      }
+    });
+
     /*
      *
      * Preview Button
@@ -343,7 +479,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * Reset Button
      *
      * */
-    sf1.EventBus.bind('post.resetPostButtonClicked', function (event) {
+    sf1.EventBus.on('post.resetPostButtonClicked', function (event) {
       sf1.logger.info('Reset post button click event');
       sf1.logger.info('Post Contents - reset: ' + $('#wysihtml5-textarea').val());
     });
@@ -352,7 +488,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * Close Preview Button
      *
      * */
-    sf1.EventBus.bind('post.closePostPreviewButtonClicked', function (event) {
+    sf1.EventBus.on('post.closePostPreviewButtonClicked', function (event) {
       sf1.logger.info('close preview post button click event');
       sf1.logger.info('Post Contents post preview button clicked: ' + $('#wysihtml5-textarea').val());
       $('.btn-close-preview').hide();
@@ -362,7 +498,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * Change Post Status
      *
      * */
-    sf1.EventBus.bind('post.changePostStatusClicked', function (event) {
+    sf1.EventBus.on('post.changePostStatusClicked', function (event) {
       // replace link with select control
       // set the value of the control
       var postId = $(event.target).data('id');
@@ -391,7 +527,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * Change Post Status Select Element Change Event
      *
      * */
-    sf1.EventBus.bind('post.postStatusSelectChanged', function (data) {
+    sf1.EventBus.on('post.postStatusSelectChanged', function (data) {
       var postId = data.id;
       var postStatus = data.status;
       var postData = {};
@@ -451,7 +587,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * Edit Post
      *
      * */
-    sf1.EventBus.bind('post.editPostRequest', function (event) {
+    sf1.EventBus.on('post.editPostRequest', function (event) {
       var postId = $(event.target).data('id');
       if (postId) {
         sf1.EventBus.trigger('post.loadEditPost', postId);
@@ -464,7 +600,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * Publish Post Request
      *
      * */
-    sf1.EventBus.bind('post.publishPostDialogRequest', function (post) {
+    sf1.EventBus.on('post.publishPostDialogRequest', function (post) {
 
       // set the author
       var author = sf1.currUserName();
@@ -487,7 +623,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
         view: 'PublishPostDialog',
         data: {data: post},
         callback: function () {
-          sf1.EventBus.bind('post.publishPostSuccess', function () {
+          sf1.EventBus.on('post.publishPostSuccess', function () {
             $.modal.close();
             userId = sf1.currUserId();
             sf1.EventBus.trigger('post.loadUserPosts', userId);
@@ -503,7 +639,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
      * Supersede Post Request
      *
      * */
-    sf1.EventBus.bind('post.supersedePostDialogRequest', function (post) {
+    sf1.EventBus.on('post.supersedePostDialogRequest', function (post) {
 
       // set the author
       var author = sf1.currUserName();
@@ -540,7 +676,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
 
 
 
-    sf1.EventBus.bind('post.publishPostBtnClicked', function (event) {
+    sf1.EventBus.on('post.publishPostBtnClicked', function (event) {
       // get the post data
 
       var postId = $(event.target).data('id');
@@ -571,7 +707,7 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
     });
 
     // Supersede Post Button Clicked
-    sf1.EventBus.bind('post.supersedePostBtnClicked', function (event) {
+    sf1.EventBus.on('post.supersedePostBtnClicked', function (event) {
       // get the post data
 
       var postId = $(event.target).data('id');
@@ -676,6 +812,27 @@ define(['sf1', 'modules/post/post.models', 'modules/post/post.views', 'text!modu
       sf1.logger.info('TEXT AREA LOADED EVENT LISTENER FIRED');
 
     });
+
+//    // Auto Save Preference Changed
+    sf1.EventBus.on('post.autoSavePreferenceUpdate',function(eventObj){
+
+      if(eventObj.autoSaveInterval && (eventObj.autoSaveInterval > 0)){
+        setAutoSaveInterval(eventObj.autoSaveInterval);
+      }
+      if(eventObj.autoSaveEnabled !== undefined){
+        setAutosaveEnabled(eventObj.autoSaveEnabled);
+      }
+      if (!isAutoSaveOn()){
+        clearInterval(intervalPlaceholder);
+      }
+      else{
+        View.initAutosaveInterval(getAutosaveInterval());
+        autoSaveTimer();
+      }
+
+
+    });
+
 
     return{
       IndexView: indexView,
