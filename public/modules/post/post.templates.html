@@ -14,15 +14,13 @@
         <h1>Post Editor</h1>
         <button class="btn-close-preview btn-post-control">close preview</button>
         <div class="post-preview post-body"></div>
-<a href="#PostPanel" class="lnk-show-posts">POSTS</a>
+        <a href="#PostPanel" class="lnk-show-posts">POSTS</a>
         <form id="PostForm">
-            <div class="form-controls-container" class="row">
+            <div class="row">
                 <button class="btn-round btn-save btn-post-control btn-save-post">Save</button>
                 <button class="btn-round btn-reset btn-post-control btn-reset-post">Clear</button>
                 <button class="btn-round btn-preview btn-post-control btn-preview-post">preview</button>
-                <label for="AutoSaveCheckbox"><input type="checkbox" id="AutoSaveCheckbox" > Autosave</label>
-                <label for="AutoSaveInterval"><input type="number" class="post-autosave-interval" id="AutoSaveInterval">interval (mins)</label>
-            </div>
+             </div>
             <fieldset>
                 <input id="PostId" name="PostId" type="hidden" />
                 <input id="PostUserId" name="PostUserId" type="hidden" />
@@ -30,11 +28,12 @@
                 <input id="PostTitle" name="PostTitle" class="input-post-title" placeholder="post title" />
                 <div id="PostEditor" name="PostEditor" data-region="editorRegion">Post Goes Here</div>
             </fieldset>
-            <div class="form-controls-container" class="row">
+            <div class="row">
                 <button class="btn-round btn-save btn-post-control btn-save-post">Save</button>
                 <button class="btn-round btn-reset btn-post-control btn-reset-post">Clear</button>
                 <button class="btn-round btn-preview btn-post-control btn-preview-post">preview</button>
-
+                <label for="AutoSaveCheckbox"><input type="checkbox" id="AutoSaveCheckbox" > Autosave</label>
+                <label for="AutoSaveInterval"><input type="number" class="post-autosave-interval" id="AutoSaveInterval">interval (mins)</label>
             </div>
         </form>
 

@@ -1931,6 +1931,12 @@ a.error:hover {
 .recent-post-list {
   list-style: none;
 }
+.post-autosave-interval {
+  width: 2rem;
+}
+.form-controls-container {
+  width: 12rem;
+}
 .toast-container {
   width: 280px;
   z-index: 9999;
