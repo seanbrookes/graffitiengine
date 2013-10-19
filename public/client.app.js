@@ -1,5 +1,5 @@
 /**
- * Simple Framework One
+ * Graffiti Engine
 
  * User: sean
  * Date: 11/12/12

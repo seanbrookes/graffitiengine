@@ -1,5 +1,5 @@
 /**
- * Greenfinger
+ * Graffiti Engine
  *
  * User: sean
  * Date: 13/04/13
