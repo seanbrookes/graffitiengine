@@ -1,5 +1,5 @@
 {
-  "name": "fourfivesix",
+  "name": "graffitiengine",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -26,18 +26,18 @@
     "grunt-contrib-less": "~0.7.0",
     "grunt-contrib-watch": "~0.5.3"
   },
-  "description": "FourFiveSix is a blog implementation",
+  "description": "Grafiti Engine is a static file blog engine app",
   "main": "app.js",
   "directories": {
     "test": "tests"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/seanbrookes/fourfivesix.git"
+    "url": "https://github.com/seanbrookes/graffitiengine.git"
   },
   "author": "Sean Brookes",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/seanbrookes/fourfivesix/issues"
+    "url": "https://github.com/seanbrookes/graffitiengine/issues"
   }
 }

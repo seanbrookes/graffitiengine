@@ -1,10 +1,11 @@
-fourfivesix
+Graffiti Engine
 ===========
 
 Graffiti Engine implementation
 
+
 - a jump off point
-- dmonstrate the following
+- demonstrate the following
 -- mongo db
 -- Nodejs based rest web service
 -- backbonejs (marionettejs) based front end

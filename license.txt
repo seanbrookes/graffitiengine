@@ -1,5 +1,5 @@
 ========================================
-Simple Framework One (sf1) is licensed under the MIT License
+Graffite Engine (graffitiengine) is licensed under the MIT License
 ========================================
 
 Copyright (C) 2011--2012 Sean Brookes - seanbrookes@beachair.ca
